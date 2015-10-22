@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="ja">
+  <head>
+    <META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=UTF-8">
+    <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+    <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
+
+    <title>Sample</title>
+    <script type="text/javascript">
+      function alertfunc()
+      {
+          alert("");
+          // document.location.href = url;
+      }
+    </script>
+
+    <style type="text/css">
+        body{
+          background-color: #E0FFFF;
+          width:750px;
+          margin:0 auto 0 auto;
+        }
+
+        #Title{
+            text-align: left;
+        }
+
+        #Message{
+          text-align: left;
+          margin-left: 20px;
+        }
+
+        #Date{
+          text-align: right;
+        }
+
+        #resolution{
+          text-align: left;
+        }
+        #BLACK{
+          background-color: #666666;
+        }
+        #GOODS{
+          background-color: #E9967A;
+        }
+        #RESCUE{
+          background-color: #FF3333;
+        }
+
+        .menu{
+          background-color: #32CD32;
+          width:750px;
+          height: 50px;
+          margin: 0 auto;
+        }
+        .option_main{
+            float: left;
+            width: 750;
+            background: #FFE2B2;
+            height: 1000px;
+        }
+        .option{
+          float:left;
+          width:100px;
+          background-color: #FFE2B2;
+          height: 300px;
+        }
+
+        .main{
+          float:left;
+          width:600px;
+            margin-left: 10px;
+          background-color: #D1F0FF;
+          height: 0px;
+        }
+        .clears{
+          clear:both;
+        }
+
+    </style>
+
+  </head>
+  <body>
+    <center><H1>本部　掲示板</H1></center>
+    <div class="menu">
+    <form method="POST" action="http://localhost:8080/cgi-bin/pyboard.cgi" target="pyboard">
+    <center>
+    <button type="submit" name="Menu" value="METHANE" style="height: 50px; width: 246px; margin:0 0;">DMAT情報(METHANE)</button>
+    <button type="submit" name="Menu" value="EMIS" style="height: 50px; width: 247px; margin:0 0;">DMAT情報(避難所情報)</button>
+    <button type="submit" name="Menu" value="Victim" style="height: 50px; width: 246px; margin:0 0;">被災者情報</button>
+    </center>
+    </form>
+    </div>
+      <iframe name="pyboard" src="http://localhost:8080/cgi-bin/pyboard.cgi" width="100%" height="1000px" frameborder="0" />
+  </body>
+</html>

@@ -1,0 +1,449 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3CDCF86E1B44D29800BB1EF1 /* SwiftData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDCF86D1B44D29800BB1EF1 /* SwiftData.swift */; };
+		3CE8C1511B5F48350008A3AF /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE8C1501B5F48350008A3AF /* Reachability.swift */; };
+		3CE8C1531B5F4DDC0008A3AF /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CE8C1521B5F4DDC0008A3AF /* SystemConfiguration.framework */; };
+		3CF336471B325CFA00AC5C3E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF336461B325CFA00AC5C3E /* AppDelegate.swift */; };
+		3CF336491B325CFA00AC5C3E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF336481B325CFA00AC5C3E /* ViewController.swift */; };
+		3CF3364C1B325CFA00AC5C3E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CF3364A1B325CFA00AC5C3E /* Main.storyboard */; };
+		3CF3364E1B325CFA00AC5C3E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3CF3364D1B325CFA00AC5C3E /* Images.xcassets */; };
+		3CF336511B325CFA00AC5C3E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CF3364F1B325CFA00AC5C3E /* LaunchScreen.xib */; };
+		3CF3365D1B325CFA00AC5C3E /* pyboardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF3365C1B325CFA00AC5C3E /* pyboardTests.swift */; };
+		3CF336671B32743F00AC5C3E /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CF336661B32743F00AC5C3E /* libsqlite3.dylib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		3CF336571B325CFA00AC5C3E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3CF336391B325CFA00AC5C3E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3CF336401B325CFA00AC5C3E;
+			remoteInfo = pyboard;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		3CDCF86D1B44D29800BB1EF1 /* SwiftData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftData.swift; sourceTree = "<group>"; };
+		3CE8C14F1B5F2CC20008A3AF /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
+		3CE8C1501B5F48350008A3AF /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		3CE8C1521B5F4DDC0008A3AF /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		3CF336411B325CFA00AC5C3E /* pyboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pyboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3CF336451B325CFA00AC5C3E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3CF336461B325CFA00AC5C3E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		3CF336481B325CFA00AC5C3E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		3CF3364B1B325CFA00AC5C3E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		3CF3364D1B325CFA00AC5C3E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		3CF336501B325CFA00AC5C3E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		3CF336561B325CFA00AC5C3E /* pyboardTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = pyboardTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3CF3365B1B325CFA00AC5C3E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3CF3365C1B325CFA00AC5C3E /* pyboardTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pyboardTests.swift; sourceTree = "<group>"; };
+		3CF336661B32743F00AC5C3E /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3CF3363E1B325CFA00AC5C3E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3CE8C1531B5F4DDC0008A3AF /* SystemConfiguration.framework in Frameworks */,
+				3CF336671B32743F00AC5C3E /* libsqlite3.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3CF336531B325CFA00AC5C3E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3CF336381B325CFA00AC5C3E = {
+			isa = PBXGroup;
+			children = (
+				3CE8C1521B5F4DDC0008A3AF /* SystemConfiguration.framework */,
+				3CF336661B32743F00AC5C3E /* libsqlite3.dylib */,
+				3CF336431B325CFA00AC5C3E /* pyboard */,
+				3CF336591B325CFA00AC5C3E /* pyboardTests */,
+				3CF336421B325CFA00AC5C3E /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		3CF336421B325CFA00AC5C3E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3CF336411B325CFA00AC5C3E /* pyboard.app */,
+				3CF336561B325CFA00AC5C3E /* pyboardTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3CF336431B325CFA00AC5C3E /* pyboard */ = {
+			isa = PBXGroup;
+			children = (
+				3CE8C1501B5F48350008A3AF /* Reachability.swift */,
+				3CDCF86D1B44D29800BB1EF1 /* SwiftData.swift */,
+				3CF336461B325CFA00AC5C3E /* AppDelegate.swift */,
+				3CF336481B325CFA00AC5C3E /* ViewController.swift */,
+				3CF3364A1B325CFA00AC5C3E /* Main.storyboard */,
+				3CF3364D1B325CFA00AC5C3E /* Images.xcassets */,
+				3CF3364F1B325CFA00AC5C3E /* LaunchScreen.xib */,
+				3CF336441B325CFA00AC5C3E /* Supporting Files */,
+				3CE8C14F1B5F2CC20008A3AF /* Bridging-Header.h */,
+			);
+			path = pyboard;
+			sourceTree = "<group>";
+		};
+		3CF336441B325CFA00AC5C3E /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				3CF336451B325CFA00AC5C3E /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		3CF336591B325CFA00AC5C3E /* pyboardTests */ = {
+			isa = PBXGroup;
+			children = (
+				3CF3365C1B325CFA00AC5C3E /* pyboardTests.swift */,
+				3CF3365A1B325CFA00AC5C3E /* Supporting Files */,
+			);
+			path = pyboardTests;
+			sourceTree = "<group>";
+		};
+		3CF3365A1B325CFA00AC5C3E /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				3CF3365B1B325CFA00AC5C3E /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3CF336401B325CFA00AC5C3E /* pyboard */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3CF336601B325CFA00AC5C3E /* Build configuration list for PBXNativeTarget "pyboard" */;
+			buildPhases = (
+				3CF3363D1B325CFA00AC5C3E /* Sources */,
+				3CF3363E1B325CFA00AC5C3E /* Frameworks */,
+				3CF3363F1B325CFA00AC5C3E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = pyboard;
+			productName = pyboard;
+			productReference = 3CF336411B325CFA00AC5C3E /* pyboard.app */;
+			productType = "com.apple.product-type.application";
+		};
+		3CF336551B325CFA00AC5C3E /* pyboardTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3CF336631B325CFA00AC5C3E /* Build configuration list for PBXNativeTarget "pyboardTests" */;
+			buildPhases = (
+				3CF336521B325CFA00AC5C3E /* Sources */,
+				3CF336531B325CFA00AC5C3E /* Frameworks */,
+				3CF336541B325CFA00AC5C3E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3CF336581B325CFA00AC5C3E /* PBXTargetDependency */,
+			);
+			name = pyboardTests;
+			productName = pyboardTests;
+			productReference = 3CF336561B325CFA00AC5C3E /* pyboardTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3CF336391B325CFA00AC5C3E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0630;
+				ORGANIZATIONNAME = Takuro;
+				TargetAttributes = {
+					3CF336401B325CFA00AC5C3E = {
+						CreatedOnToolsVersion = 6.3.2;
+					};
+					3CF336551B325CFA00AC5C3E = {
+						CreatedOnToolsVersion = 6.3.2;
+						TestTargetID = 3CF336401B325CFA00AC5C3E;
+					};
+				};
+			};
+			buildConfigurationList = 3CF3363C1B325CFA00AC5C3E /* Build configuration list for PBXProject "pyboard" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 3CF336381B325CFA00AC5C3E;
+			productRefGroup = 3CF336421B325CFA00AC5C3E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3CF336401B325CFA00AC5C3E /* pyboard */,
+				3CF336551B325CFA00AC5C3E /* pyboardTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3CF3363F1B325CFA00AC5C3E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3CF3364C1B325CFA00AC5C3E /* Main.storyboard in Resources */,
+				3CF336511B325CFA00AC5C3E /* LaunchScreen.xib in Resources */,
+				3CF3364E1B325CFA00AC5C3E /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3CF336541B325CFA00AC5C3E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3CF3363D1B325CFA00AC5C3E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3CF336491B325CFA00AC5C3E /* ViewController.swift in Sources */,
+				3CDCF86E1B44D29800BB1EF1 /* SwiftData.swift in Sources */,
+				3CE8C1511B5F48350008A3AF /* Reachability.swift in Sources */,
+				3CF336471B325CFA00AC5C3E /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3CF336521B325CFA00AC5C3E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3CF3365D1B325CFA00AC5C3E /* pyboardTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		3CF336581B325CFA00AC5C3E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3CF336401B325CFA00AC5C3E /* pyboard */;
+			targetProxy = 3CF336571B325CFA00AC5C3E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		3CF3364A1B325CFA00AC5C3E /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3CF3364B1B325CFA00AC5C3E /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		3CF3364F1B325CFA00AC5C3E /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3CF336501B325CFA00AC5C3E /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		3CF3365E1B325CFA00AC5C3E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		3CF3365F1B325CFA00AC5C3E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		3CF336611B325CFA00AC5C3E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = pyboard/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "pyboard/Bridging-Header.h";
+			};
+			name = Debug;
+		};
+		3CF336621B325CFA00AC5C3E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = pyboard/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "pyboard/Bridging-Header.h";
+			};
+			name = Release;
+		};
+		3CF336641B325CFA00AC5C3E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = pyboardTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/pyboard.app/pyboard";
+			};
+			name = Debug;
+		};
+		3CF336651B325CFA00AC5C3E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = pyboardTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/pyboard.app/pyboard";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3CF3363C1B325CFA00AC5C3E /* Build configuration list for PBXProject "pyboard" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3CF3365E1B325CFA00AC5C3E /* Debug */,
+				3CF3365F1B325CFA00AC5C3E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3CF336601B325CFA00AC5C3E /* Build configuration list for PBXNativeTarget "pyboard" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3CF336611B325CFA00AC5C3E /* Debug */,
+				3CF336621B325CFA00AC5C3E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3CF336631B325CFA00AC5C3E /* Build configuration list for PBXNativeTarget "pyboardTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3CF336641B325CFA00AC5C3E /* Debug */,
+				3CF336651B325CFA00AC5C3E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 3CF336391B325CFA00AC5C3E /* Project object */;
+}
