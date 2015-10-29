@@ -147,7 +147,7 @@ finally:
             if cur.fetchone() == None:
                 IDnum += 1
                 #cur.execute("INSERT INTO Patienttbl(ID,LocationID,regdate,Registrant,Patient_Name,comment,SolvedFlag) values(?,'1',datetime('now','localtime'),?,?,?,'0')",(IDnum,Registrant,Patient_Name,comment))
-                cur.execute("INSERT INTO Patienttbl(ID,LocationID,regdate,Registrant,Patient_Name,Patient_Age,Patient_Gender,Patient_Triage,Patient_Injuries_Diseases,Patient_Treatment,Patient_Hospital,comment,SolvedFlag) values(?,'1',datetime('now','localtime'),?,?,?,?,?,?,?,?,?,'0')",(IDnum,Registrant,Patient_Name,Patient_Age,Patient_Gender,Patient_Triage,Patient_Injuries_Diseases,Patient_Treatment,Patient_Hospital,comment))
+                cur.execute("INSERT INTO Patienttbl(ID,LocationID,regdate,Class,Registrant,Patient_Name,Patient_Age,Patient_Gender,Patient_Triage,Patient_Injuries_Diseases,Patient_Treatment,Patient_Hospital,comment,SolvedFlag) values(?,'1',datetime('now','localtime'),'Patient',?,?,?,?,?,?,?,?,?,'0')",(IDnum,Registrant,Patient_Name,Patient_Age,Patient_Gender,Patient_Triage,Patient_Injuries_Diseases,Patient_Treatment,Patient_Hospital,comment))
             con.commit()
         except:
             con.rollback()

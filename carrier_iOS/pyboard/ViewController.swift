@@ -133,14 +133,17 @@ class ViewController: UIViewController,NSURLSessionDelegate,NSURLSessionDataDele
     }
     
     func Recievebutton(sender:UIButton){
+        println("ReciveButton")
         if sender.tag == 2{
             RecieveIPAddress = "169.254.143.4:8080/cgi-bin"
         }else if sender.tag == 3{
             RecieveIPAddress = "192.168.42.1:8000/cgi-bin"
         }
+        connectR(RecieveIPAddress)
     }
     
     func SendButton(sender:UIButton){
+        println("SendButton")
         var SendIPAddress = ""
         if sender.tag == 2{
             SendIPAddress = "169.254.143.4:8080/cgi-bin"
@@ -158,29 +161,41 @@ class ViewController: UIViewController,NSURLSessionDelegate,NSURLSessionDataDele
         
         // 帰ってきたデータを文字列に変換.
         var myData:NSString = NSString(data: data, encoding: NSUTF8StringEncoding)!
-        var textData = myData as String
+        
+        
+//        var textData = myData as String
         if self.RecieveFlag {
-            var tmpData = myData.componentsSeparatedByString(" $& ")
-//            print(tmpData)
-            textData = ""
-            for i in 0..<(tmpData.count/9){
-                textData += (tmpData[0+i*9] as! String)+":"+(tmpData[3+i*9] as! String)+"\n Location:"
-                textData += (tmpData[2+i*9] as! String)+",Tag:"+(tmpData[1+i*9] as! String)+"\n"
-                textData += (tmpData[5+i*9] as! String)+"\n Date:"+(tmpData[4+i*9] as! String)+"\n\n"
+            let paths1 = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
+            let _path = paths1[0].stringByAppendingPathComponent("data.txt")
+            
+            let success = myData.writeToFile(_path, atomically: true, encoding: NSUTF8StringEncoding, error: nil)
+            if success {
+                println("保存に成功")
             }
         }
+        println(myData)
+//            var tmpData = myData.componentsSeparatedByString(" $& ")
+////            print(tmpData)
+//            textData = ""
+//            for i in 0..<(tmpData.count/9){
+//                textData += (tmpData[0+i*9] as! String)+":"+(tmpData[3+i*9] as! String)+"\n Location:"
+//                textData += (tmpData[2+i*9] as! String)+",Tag:"+(tmpData[1+i*9] as! String)+"\n"
+//                textData += (tmpData[5+i*9] as! String)+"\n Date:"+(tmpData[4+i*9] as! String)+"\n\n"
+//            }
+//        }
         // バックグラウンドだとUIの処理が出来ないので、メインスレッドでUIの処理を行わせる.
         dispatch_async(dispatch_get_main_queue(), {
-            self.myTextView.text = textData
+            self.myTextView.text = "OK"
 //            println(self.SendFlag)
 //            println(self.SendCount)
             if self.RecieveFlag {
-                self.DBfunction(myData)
+                
+//                self.DBfunction(myData)
                 self.RecieveFlag = false
             }
             if self.SendFlag{
                 if self.SendCount == 0 {
-                    self.connectR(self.RecieveIPAddress)
+//                    self.connectR(self.RecieveIPAddress)
                     self.SendFlag = false
                 }else{
                     self.SendCount -= 1
@@ -209,7 +224,10 @@ class ViewController: UIViewController,NSURLSessionDelegate,NSURLSessionDataDele
             println("Not Input")
             return
         }
+        let Address = "localhost:8000/cgi-bin"
+        
         var URL:String! = "http://" + RecieveIPAddress + "/SendDB.py"
+        URL = "http://localhost:8000/cgi-bin/SendDB.py"
         
         var myUrl:NSURL = NSURL(string: URL)!
         
@@ -221,6 +239,7 @@ class ViewController: UIViewController,NSURLSessionDelegate,NSURLSessionDataDele
     
     func connectS(SendIPAddress:String){
 
+        
         println("connectS")
         SendFlag = true
         
@@ -229,7 +248,11 @@ class ViewController: UIViewController,NSURLSessionDelegate,NSURLSessionDataDele
             println("Not Input")
             return
         }
+        
+        let Address = "localhost:8000/cgi-bin"
+        
         var URL:String = "http://" + SendIPAddress + "/ReceveDB.py"
+        URL = "http://localhost:8000/cgi-bin/ReceveDB.py"
         
 //        println(URL)
         
@@ -240,132 +263,185 @@ class ViewController: UIViewController,NSURLSessionDelegate,NSURLSessionDataDele
         // POSTのメソッドを指定.
         myRequest.HTTPMethod = "POST"
         
-        var DBData = DBSELECT()
+        let paths1 = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
+        let _path = paths1[0].stringByAppendingPathComponent("data.txt")
         
-        println(DBData)
+        let PostData = NSString(contentsOfFile: _path, encoding: NSUTF8StringEncoding, error: nil)!
         
-        if DBData.count == 0{
-            println("DBData.count=0")
-//            let str:NSString = "ID=False"
+        println(PostData)
+        
+        var tmpData = PostData.componentsSeparatedByString("$#&")
+
+        var SendDatacount = 0
+        for data in tmpData{
+            var FinData = data.componentsSeparatedByString(" $& ")
+            if SendDatacount == 0{
+                for i in 0..<(FinData.count/13){
+                    var str = "ID=\(FinData[0+i*13])&LocationID=\(FinData[1+i*13])&Registrant=\(FinData[2+i*13])&Class=Patient&regdate=\(FinData[3+i*13])&Patient_Name=\(FinData[4+i*13])&Patient_Age=\(FinData[5+i*13])&Patient_Gender=\(FinData[6+i*13])"
+                    
+                    str += "&Patient_Triage=\(FinData[7+i*13])&Patient_Injuries_Diseases=\(FinData[8+i*13])&Patient_Treatment=\(FinData[9+i*13])&Patient_Hospital=\(FinData[10+i*13])&comment=\(FinData[11+i*13])&SolvedFlag=\(FinData[12+i*13])"
+                    println(str)
+
+                    let myData:NSData = str.dataUsingEncoding(NSUTF8StringEncoding)!
+                    myRequest.HTTPBody = myData
+        
+                    // タスクの生成.
+                    let myTask:NSURLSessionDataTask = mySession.dataTaskWithRequest(myRequest)
+                    // タスクの実行.
+                    myTask.resume()
+                }
+
+            }else if SendDatacount == 1{
+                for i in 0..<(FinData.count/5){
+                    var str = "ID=\(FinData[0+i*5])&LocationID=\(FinData[1+i*5])&Registrant=\(FinData[2+i*5])&Class=Chronology&regdate=\(FinData[3+i*5])&Message=\(FinData[4+i*5])" as NSString
+                    println(str)
+                    let myData:NSData = str.dataUsingEncoding(NSUTF8StringEncoding)!
+                    myRequest.HTTPBody = myData
+                    
+                    // タスクの生成.
+                    let myTask:NSURLSessionDataTask = mySession.dataTaskWithRequest(myRequest)
+                    // タスクの実行.
+                    myTask.resume()
+                }
+            }else{
+                for i in 0..<(FinData.count/6){
+                    var str = "ID=\(FinData[0+i*6])&LocationID=\(FinData[1+i*6])&Registrant=\(FinData[2+i*6])&Class=Instraction&Target=\(FinData[3+i*6])&regdate=\(FinData[4+i*6])&Message=\(FinData[5+i*6])" as NSString
+                    println(str)
+                    let myData:NSData = str.dataUsingEncoding(NSUTF8StringEncoding)!
+                    myRequest.HTTPBody = myData
+                    
+                    // タスクの生成.
+                    let myTask:NSURLSessionDataTask = mySession.dataTaskWithRequest(myRequest)
+                    // タスクの実行.
+                    myTask.resume()
+                }
+            }
+            SendDatacount++
+        }
+    }
+    
+//        if DBData.count == 0{
+//            println("DBData.count=0")
+////            let str:NSString = "ID=False"
+////            let myData:NSData = str.dataUsingEncoding(NSUTF8StringEncoding)!
+////            myRequest.HTTPBody = myData
+////            
+////            // タスクの生成.
+////            let myTask:NSURLSessionDataTask = mySession.dataTaskWithRequest(myRequest)
+////            // タスクの実行.
+////            myTask.resume()
+//            SendFlag = false
+//            self.connectR(self.RecieveIPAddress)
+//            
+//            return
+//        }
+//        
+//        SendCount = Int(DBData.count/9)-1
+//        println(SendCount)
+        
+//        // 送信するデータを生成・リクエストにセット.
+//        for i in 0..<(DBData.count/9){
+//            let str:NSString = "ID=\(DBData[0+i*9])&genre=\(DBData[1+i*9])&LocationID=\(DBData[2+i*9])&name=\(DBData[3+i*9])&regdate=\(DBData[4+i*9])&comment=\(DBData[5+i*9])&SolvedFlag=\(DBData[6+i*9])&Replyname=\(DBData[7+i*9])&Replycomment=\(DBData[8+i*9])"
+//            println(str)
 //            let myData:NSData = str.dataUsingEncoding(NSUTF8StringEncoding)!
 //            myRequest.HTTPBody = myData
-//            
+//        
 //            // タスクの生成.
 //            let myTask:NSURLSessionDataTask = mySession.dataTaskWithRequest(myRequest)
 //            // タスクの実行.
 //            myTask.resume()
-            SendFlag = false
-            self.connectR(self.RecieveIPAddress)
-            
-            return
-        }
-        
-        SendCount = Int(DBData.count/9)-1
-//        println(SendCount)
-        
-        // 送信するデータを生成・リクエストにセット.
-        for i in 0..<(DBData.count/9){
-            let str:NSString = "ID=\(DBData[0+i*9])&genre=\(DBData[1+i*9])&LocationID=\(DBData[2+i*9])&name=\(DBData[3+i*9])&regdate=\(DBData[4+i*9])&comment=\(DBData[5+i*9])&SolvedFlag=\(DBData[6+i*9])&Replyname=\(DBData[7+i*9])&Replycomment=\(DBData[8+i*9])"
-            println(str)
-            let myData:NSData = str.dataUsingEncoding(NSUTF8StringEncoding)!
-            myRequest.HTTPBody = myData
-        
-            // タスクの生成.
-            let myTask:NSURLSessionDataTask = mySession.dataTaskWithRequest(myRequest)
-            // タスクの実行.
-            myTask.resume()
-        }
-    }
+//        }
+//    }
     
-    func DBfunction(myData:NSString){
-        //table作成
-//        println("FUNCTION")
-        DBCREATE()
-        DBINSERT(myData)
-
-        DBSELECT()
-    }
-    
-    func DBCREATE(){
-        self.isExistsDataBase()
-        if let err = SD.createTable("testTable", withColumnNamesAndTypes: ["LocalID": .StringVal, "genre": .StringVal, "LocationID": .StringVal, "name": .StringVal,"regdate": .DateVal, "comment": .StringVal, "SolvedFlag": .StringVal, "ReplyName": .StringVal, "ReplyMessage": .StringVal]){
-            println(SwiftData.errorMessageForCode(err))
-            return
-        }
-//        println("create")
-    }
-    
-    func isExistsDataBase() -> Bool{
-        let (tb, err) = SwiftData.existingTables();
-        if(!contains(tb, "testTable")){
-            return false;
-        }
-        else{
-            SD.deleteTable("testTable")
-            return true;
-        }
-    }
-    
-    func DBINSERT(myData:NSString){
-        //代入処理
-        var separators = NSCharacterSet(charactersInString: "\n")
-        var words = myData.componentsSeparatedByCharactersInSet(separators)
-        
-        for i in 0..<(words.count-2){
-            var RData = words[i+1].componentsSeparatedByString(" $& ")
-//            println(RData)
-
-            let formatter:NSDateFormatter = NSDateFormatter()
-            formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-            var time : NSDate = formatter.dateFromString(RData[4] as! String)!
-            
-            let Insql = "INSERT INTO testTable(LocalID, Genre, LocationID, name, regdate, comment, SolvedFlag, ReplyName, ReplyMessage) VALUES(?,?,?,?,?,?,?,?,?)"
-            if let err = SD.executeChange(Insql, withArgs: [RData[0],RData[1],RData[2],RData[3],time,RData[5],RData[6],RData[7],RData[8]]){
-                println("IN")
-                println(SwiftData.errorMessageForCode(err))
-                return
-            }
-            else{
-                println("OK INSERT")
-            }
-
-        }
-    }
-    
-    func DBSELECT() -> NSMutableArray{
-        //出力処理
-        let Outsql = "SELECT DISTINCT * FROM testTable"
-        let (resultSet, err) = SD.executeQuery(Outsql)
-        var DBData:NSMutableArray = []
-        
-        if err != nil {
-            println("OUT")
-            println(SwiftData.errorMessageForCode(err!))
-            return []
-        }else{
-            for row in resultSet{
-//                var LocationID = row["LocationID"]!.asString()
-//                var name = row["name"]!.asString()
-//                var title = row["title"]!.asString()
-                var regdate = row["regdate"]!.asDate()
-                var date_formatter = NSDateFormatter()
-                date_formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-                var time = date_formatter.stringFromDate(regdate!)
-//                var comment = row["comment"]!.asString()
-                
-                DBData.addObject(row["LocalID"]!.asString()!)
-                DBData.addObject(row["genre"]!.asString()!)
-                DBData.addObject(row["LocationID"]!.asString()!)
-                DBData.addObject(row["name"]!.asString()!)
-                DBData.addObject(time)
-                DBData.addObject(row["comment"]!.asString()!)
-                DBData.addObject(row["SolvedFlag"]!.asString()!)
-                DBData.addObject(row["ReplyName"]!.asString()!)
-                DBData.addObject(row["ReplyMessage"]!.asString()!)
-            }
-            return DBData
-        }
-    }
+//    func DBfunction(myData:NSString){
+//        //table作成
+////        println("FUNCTION")
+//        DBCREATE()
+//        DBINSERT(myData)
+//
+//        DBSELECT()
+//    }
+//    
+//    func DBCREATE(){
+//        self.isExistsDataBase()
+//        if let err = SD.createTable("testTable", withColumnNamesAndTypes: ["LocalID": .StringVal, "genre": .StringVal, "LocationID": .StringVal, "name": .StringVal,"regdate": .DateVal, "comment": .StringVal, "SolvedFlag": .StringVal, "ReplyName": .StringVal, "ReplyMessage": .StringVal]){
+//            println(SwiftData.errorMessageForCode(err))
+//            return
+//        }
+////        println("create")
+//    }
+//    
+//    func isExistsDataBase() -> Bool{
+//        let (tb, err) = SwiftData.existingTables();
+//        if(!contains(tb, "testTable")){
+//            return false;
+//        }
+//        else{
+//            SD.deleteTable("testTable")
+//            return true;
+//        }
+//    }
+//    
+//    func DBINSERT(myData:NSString){
+//        //代入処理
+//        var separators = NSCharacterSet(charactersInString: "\n")
+//        var words = myData.componentsSeparatedByCharactersInSet(separators)
+//        
+//        for i in 0..<(words.count-2){
+//            var RData = words[i+1].componentsSeparatedByString(" $& ")
+////            println(RData)
+//
+//            let formatter:NSDateFormatter = NSDateFormatter()
+//            formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+//            var time : NSDate = formatter.dateFromString(RData[4] as! String)!
+//            
+//            let Insql = "INSERT INTO testTable(LocalID, Genre, LocationID, name, regdate, comment, SolvedFlag, ReplyName, ReplyMessage) VALUES(?,?,?,?,?,?,?,?,?)"
+//            if let err = SD.executeChange(Insql, withArgs: [RData[0],RData[1],RData[2],RData[3],time,RData[5],RData[6],RData[7],RData[8]]){
+//                println("IN")
+//                println(SwiftData.errorMessageForCode(err))
+//                return
+//            }
+//            else{
+//                println("OK INSERT")
+//            }
+//
+//        }
+//    }
+//    
+//    func DBSELECT() -> NSMutableArray{
+//        //出力処理
+//        let Outsql = "SELECT DISTINCT * FROM testTable"
+//        let (resultSet, err) = SD.executeQuery(Outsql)
+//        var DBData:NSMutableArray = []
+//        
+//        if err != nil {
+//            println("OUT")
+//            println(SwiftData.errorMessageForCode(err!))
+//            return []
+//        }else{
+//            for row in resultSet{
+////                var LocationID = row["LocationID"]!.asString()
+////                var name = row["name"]!.asString()
+////                var title = row["title"]!.asString()
+//                var regdate = row["regdate"]!.asDate()
+//                var date_formatter = NSDateFormatter()
+//                date_formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+//                var time = date_formatter.stringFromDate(regdate!)
+////                var comment = row["comment"]!.asString()
+//                
+//                DBData.addObject(row["LocalID"]!.asString()!)
+//                DBData.addObject(row["genre"]!.asString()!)
+//                DBData.addObject(row["LocationID"]!.asString()!)
+//                DBData.addObject(row["name"]!.asString()!)
+//                DBData.addObject(time)
+//                DBData.addObject(row["comment"]!.asString()!)
+//                DBData.addObject(row["SolvedFlag"]!.asString()!)
+//                DBData.addObject(row["ReplyName"]!.asString()!)
+//                DBData.addObject(row["ReplyMessage"]!.asString()!)
+//            }
+//            return DBData
+//        }
+//    }
     
     
     func Reachable(reachability: Reachability) {

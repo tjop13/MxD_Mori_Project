@@ -109,7 +109,7 @@ finally:
             if cur.fetchone() == None:
                 IDnum += 1
                 #cur.execute("INSERT INTO Chronologytbl(ID,LocationID,regdate,Registrant,Patient_Name,comment,SolvedFlag) values(?,'1',datetime('now','localtime'),?,?,?,'0')",(IDnum,Registrant,Patient_Name,comment))
-                cur.execute("INSERT INTO Chronologytbl(ID,LocationID,regdate,Registrant,Message) values(?,'1',datetime('now','localtime'),?,?)",(IDnum,Registrant,Message))
+                cur.execute("INSERT INTO Chronologytbl(ID,LocationID,regdate,Class,Registrant,Message) values(?,'1',datetime('now','localtime'),'Chronology',?,?)",(IDnum,Registrant,Message))
             con.commit()
         except:
             con.rollback()
