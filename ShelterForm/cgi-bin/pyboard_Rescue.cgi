@@ -30,14 +30,14 @@ print '''
         }
         .option{
           float:left;
-          width:100px;
+          width:140px;
           background-color: #6699BB;
           height: 400px;
         }
 
         .main{
           float:left;
-          width: 650px;
+          width: 600px;
         }
 
         #Title{
@@ -88,22 +88,18 @@ try:
                 <form method="POST" action="pyboard_Patient.cgi" target="pyboard_Patient" >
                   <br>
                       トリアージ:<br>
-                  <input type="radio" name="TAG" value="ALL" style-"margin-left: 5px;" id="TagALL" checked/>
-                  <label for="TagALL">ALL</label><br>
-                  <input type="radio" name="TAG" value="Black" style-"margin-left: 5px;" id="TagRescue"/>
+                  <input type="checkbox" name="TAGBlack" value="Black" style-"margin-left: 5px;" id="TagRescue"/>
                   <label for="TagRescue">黒</label><br>
-                  <input type="radio" name="TAG" value="Red" style-"margin-left: 5px;" id="TagGoods"/>
+                  <input type="checkbox" name="TAGRed" value="Red" style-"margin-left: 5px;" id="TagGoods"/>
                   <label for="TagGoods">赤</label><br>
-                  <input type="radio" name="TAG" value="Yellow" style-"margin-left: 5px;" id="TagGoods"/>
+                  <input type="checkbox" name="TAGYellow" value="Yellow" style-"margin-left: 5px;" id="TagGoods"/>
                   <label for="TagGoods">黄</label><br>
-                  <input type="radio" name="TAG" value="Green" style-"margin-left: 5px;" id="TagGoods"/>
+                  <input type="checkbox" name="TAGGreen" value="Green" style-"margin-left: 5px;" id="TagGoods"/>
                   <label for="TagGoods">緑</label><br>
                       Soloved:<br>
-                  <input type="radio" name="SOLVE" value="ALL" style-"margin-left: 5px;" id="SolveALL" checked/>
-                  <label for="SolveALL">ALL</label><br>
-                  <input type="radio" name="SOLVE" value="Resolve" style-"margin-left: 5px;" id="SolveResolve"/>
+                  <input type="checkbox" name="Resolve" value="Resolve" style-"margin-left: 5px;" id="SolveResolve"/>
                   <label for="SolveResolve">Resolve</label><br>
-                  <input type="radio" name="SOLVE" value="Unsolved" style-"margin-left: 5px;" id="SolveUnsolved"/>
+                  <input type="checkbox" name="Unsolved" value="Unsolved" style-"margin-left: 5px;" id="SolveUnsolved"/>
                   <label for="SolveUnsolved">Unsolved</label><br><br>
 
                   <button type="submit" style="margin-left: 5px; width: 90px; height: 30px;">変更</button>
@@ -157,26 +153,21 @@ try:
             '''
         elif form.getfirst('Menu','') == "Chronology":
             print '''
-                  <form method="POST" action="pyboard_chronology.py" target="pyboard_chronology" >
+                  <form method="POST" action="pyboard_chronology.cgi" target="pyboard_chronology" id="Location">
                     <br>
-                        担当者:<br>
-                    <input type="radio" name="TAG" value="ALL" style-"margin-left: 5px;" id="TagALL" checked/>
-                    <label for="TagALL">ALL</label><br>
-                    <input type="radio" name="TAG" value="Black" style-"margin-left: 5px;" id="TagRescue"/>
-                    <label for="TagRescue">黒</label><br>
-                    <input type="radio" name="TAG" value="Red" style-"margin-left: 5px;" id="TagGoods"/>
-                    <label for="TagGoods">赤</label><br>
-                    <input type="radio" name="TAG" value="Yellow" style-"margin-left: 5px;" id="TagGoods"/>
-                    <label for="TagGoods">黄</label><br>
-                    <input type="radio" name="TAG" value="Green" style-"margin-left: 5px;" id="TagGoods"/>
-                    <label for="TagGoods">緑</label><br>
-                        Soloved:<br>
-                    <input type="radio" name="SOLVE" value="ALL" style-"margin-left: 5px;" id="SolveALL" checked/>
-                    <label for="SolveALL">ALL</label><br>
-                    <input type="radio" name="SOLVE" value="Resolve" style-"margin-left: 5px;" id="SolveResolve"/>
-                    <label for="SolveResolve">Resolve</label><br>
-                    <input type="radio" name="SOLVE" value="Unsolved" style-"margin-left: 5px;" id="SolveUnsolved"/>
-                    <label for="SolveUnsolved">Unsolved</label><br><br>
+                        記入者:<br>
+                    <input type="text" name="name" size="13" value="">
+                        場所ID:<br>
+                    <select name="location" form="Location">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    </select><br>
+                        タグ:<br>
+                    <input type="checkbox" name="TAGInfo_Shelter" value="Info_Shelter" style-"margin-left: 5px;" id="Info_Shelter"/>
+                    <label for="Info_Shelter">救護所情報</label><br>
+                    <input type="checkbox" name="TAGEdit_Patient" value="Edit_Patient" style-"margin-left: 5px;" id="Edit_Patient"/>
+                    <label for="Edit_Patient">傷病者情報編集</label><br>
 
                     <button type="submit" style="margin-left: 5px; width: 90px; height: 30px;">変更</button>
                   </form>
@@ -206,26 +197,12 @@ try:
               '''
         elif form.getfirst('Menu','') == "Instraction":
           print '''
-                <form method="POST" action="pyboard_Instraction.py" target="pyboard_Instraction" >
+                <form method="POST" action="pyboard_Instraction.cgi" target="pyboard_Instraction" >
                   <br>
-                      担当者:<br>
-                  <input type="radio" name="TAG" value="ALL" style-"margin-left: 5px;" id="TagALL" checked/>
-                  <label for="TagALL">ALL</label><br>
-                  <input type="radio" name="TAG" value="Black" style-"margin-left: 5px;" id="TagRescue"/>
-                  <label for="TagRescue">黒</label><br>
-                  <input type="radio" name="TAG" value="Red" style-"margin-left: 5px;" id="TagGoods"/>
-                  <label for="TagGoods">赤</label><br>
-                  <input type="radio" name="TAG" value="Yellow" style-"margin-left: 5px;" id="TagGoods"/>
-                  <label for="TagGoods">黄</label><br>
-                  <input type="radio" name="TAG" value="Green" style-"margin-left: 5px;" id="TagGoods"/>
-                  <label for="TagGoods">緑</label><br>
-                      Soloved:<br>
-                  <input type="radio" name="SOLVE" value="ALL" style-"margin-left: 5px;" id="SolveALL" checked/>
-                  <label for="SolveALL">ALL</label><br>
-                  <input type="radio" name="SOLVE" value="Resolve" style-"margin-left: 5px;" id="SolveResolve"/>
-                  <label for="SolveResolve">Resolve</label><br>
-                  <input type="radio" name="SOLVE" value="Unsolved" style-"margin-left: 5px;" id="SolveUnsolved"/>
-                  <label for="SolveUnsolved">Unsolved</label><br><br>
+                      記入者:<br>
+                  <input type="text" name="name" size="13" value="">
+                      宛先:<br>
+                  <input type="text" name="target" size="13" value="">
 
                   <button type="submit" style="margin-left: 5px; width: 90px; height: 30px;">変更</button>
                 </form>
@@ -257,25 +234,21 @@ try:
             '''
     else:
         print '''
-            <form method="POST" action="pyboard_Patient.py" target="pyboard_Patient" >
+            <form method="POST" action="pyboard_Patient.cgi" target="pyboard_Patient" >
               <br>
                   トリアージ:<br>
-              <input type="radio" name="TAG" value="ALL" style-"margin-left: 5px;" id="TagALL" checked/>
-              <label for="TagALL">ALL</label><br>
-              <input type="radio" name="TAG" value="Black" style-"margin-left: 5px;" id="TagRescue"/>
+              <input type="checkbox" name="TAGBlack" value="Black" style-"margin-left: 5px;" id="TagRescue"/>
               <label for="TagRescue">黒</label><br>
-              <input type="radio" name="TAG" value="Red" style-"margin-left: 5px;" id="TagGoods"/>
+              <input type="checkbox" name="TAGRed" value="Red" style-"margin-left: 5px;" id="TagGoods"/>
               <label for="TagGoods">赤</label><br>
-              <input type="radio" name="TAG" value="Yellow" style-"margin-left: 5px;" id="TagGoods"/>
+              <input type="checkbox" name="TAGYellow" value="Yellow" style-"margin-left: 5px;" id="TagGoods"/>
               <label for="TagGoods">黄</label><br>
-              <input type="radio" name="TAG" value="Green" style-"margin-left: 5px;" id="TagGoods"/>
+              <input type="checkbox" name="TAGGreen" value="Green" style-"margin-left: 5px;" id="TagGoods"/>
               <label for="TagGoods">緑</label><br>
                   Soloved:<br>
-              <input type="radio" name="SOLVE" value="ALL" style-"margin-left: 5px;" id="SolveALL" checked/>
-              <label for="SolveALL">ALL</label><br>
-              <input type="radio" name="SOLVE" value="Resolve" style-"margin-left: 5px;" id="SolveResolve"/>
+              <input type="checkbox" name="RESOLVE" value="Resolve" style-"margin-left: 5px;" id="SolveResolve"/>
               <label for="SolveResolve">Resolve</label><br>
-              <input type="radio" name="SOLVE" value="Unsolved" style-"margin-left: 5px;" id="SolveUnsolved"/>
+              <input type="checkbox" name="UNSOLVE" value="Unsolved" style-"margin-left: 5px;" id="SolveUnsolved"/>
               <label for="SolveUnsolved">Unsolved</label><br><br>
 
               <button type="submit" style="margin-left: 5px; width: 90px; height: 30px;">変更</button>

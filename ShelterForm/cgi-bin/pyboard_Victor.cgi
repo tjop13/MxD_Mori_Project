@@ -76,7 +76,7 @@ con = sqlite3.connect("board.db")
 try:
     # DB作成
     cur = con.cursor()
-    cur.executescript("""CREATE TABLE Victortbl(UNIQUEID integer primary key autoincrement, ID integer, LocationID varchar(5), Genre varchar(10), regdate timestamp,name varchar(100),comment varchar(1024),Replyname varchar(100),Replycomment varchar(1024),SolvedFlag varchar(1));""")
+    cur.executescript("""CREATE TABLE Victortbl(UNIQUEID integer primary key autoincrement, ID integer, LocationID varchar(5), Genre varchar(10), regdate timestamp,name varchar(100),comment varchar(1024),Replyname varchar(100),Replycomment varchar(1024),SolvedFlag varchar(1), Send varchar(2));""")
     cur.close()
 except:
     print

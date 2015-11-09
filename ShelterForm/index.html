@@ -11,21 +11,21 @@
           background-color: #FFDECA;
         }
         .contents{
-          width: 700px;
+          width: 750px;
           height: 400px;
           background-color: #FFDECA;
           margin:0 auto 0 auto;
         }
         .menu{
           background-color: #32CD32;
-          width:700px;
+          width:750px;
           height: 50px;
           margin: 0 auto;
           margin-bottom: 20px;
         }
         .option{
           float:left;
-          width:100px;
+          width:140px;
           background-color: #6699BB;
           height: 400px;
         }
@@ -39,10 +39,11 @@
   <body>
     <div class="contents">
     <center><H1>避難所1　掲示板</H1></center>
+    <center><a href="Rescue.html"><button>救助隊用</button></a></center>
     <div class="menu">
-      <form method="POST" action="http://localhost:8000/cgi-bin/pyboard.cgi" target="pyboard">
+      <form method="POST" action="http://localhost:8000/cgi-bin/pyboard_Victor.cgi" target="pyboard_Victor">
       <button type="submit" name="Menu" value="Patient" style="height: 50px; width: 49%; margin:0 0;">情報投稿掲示板</button>
-      <button type="submit" name="Menu" value="Chronology" style="height: 50px; width: 49%; margin:0 0;">News</button>
+      <button type="submit" name="Menu" value="Chronology" style="height: 50px; width: 49%; margin:0 0;" disabled>News</button>
       </form>
     </div>
     <div class="option">
@@ -50,12 +51,19 @@
         <br>
             名前検索:<br>
         <input type="text" name="name" size="13" value="">
+            タグ:<br>
+        <input type="checkbox" name="TAGRescue" value="Black" style-"margin-left: 5px;" id="TagRescue"/>
+        <label for="TagRescue">救急</label><br>
+        <input type="checkbox" name="TAGGoods" value="Red" style-"margin-left: 5px;" id="TagGoods"/>
+        <label for="TagGoods">物資</label><br>
+        <input type="checkbox" name="TAGShelter" value="Yellow" style-"margin-left: 5px;" id="TAGShelter"/>
+        <label for="TagShelter">避難所</label><br>
 
         <button type="submit" style="margin-left: 5px; width: 90px; height: 30px;">変更</button>
       </form>
     </div>
     <div class="main">
-    <form method="POST" action="http://localhost:8000/cgi-bin/pyboard.cgi" target="pyboard">
+    <form method="POST" action="http://localhost:8000/cgi-bin/pyboard_Victor.cgi" target="pyboard_Victor">
     <table>
     <tr>
     <td><b>Name:</b></td>
@@ -77,7 +85,7 @@
     </tr>
     </table>
     </form>
-    <iframe name="pyboard" src="http://localhost:8000/cgi-bin/pyboard.cgi" width="100%" height="3000px" frameborder="0" />
+    <iframe name="pyboard_Victor" src="http://localhost:8000/cgi-bin/pyboard_Victor.cgi" width="100%" height="3000px" frameborder="0" />
   </div>
   </div>
   </body>

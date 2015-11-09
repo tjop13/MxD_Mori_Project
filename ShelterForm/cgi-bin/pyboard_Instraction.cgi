@@ -43,6 +43,9 @@ print '''
           margin-left: 20px;
         }
 
+        #BLACK{
+          background-color: #666666;
+        }
         #Date{
           text-align: right;
         }
@@ -68,7 +71,7 @@ message = '''
     </dd><br>
     <dd id="Date">
     <form>
-    <input type="submit" name=%(EditButton)s value="Edit">
+    <input type="submit" name=%(ConfirmationButton)s value="確認完了">
     </form>
     </dd>
     '''
@@ -78,7 +81,7 @@ con = sqlite3.connect("board.db")
 try:
     # DB作成
     cur = con.cursor()
-    cur.executescript("""CREATE TABLE Instractiontbl(UNIQUEID integer primary key autoincrement, ID integer, LocationID varchar(5), regdate timestamp, Registrant varchar(100), Target varchar(100), Message varchar(1024),Replyname varchar(100),Replycomment varchar(1024), SolvedFlag varchar(1));""")
+    cur.executescript("""CREATE TABLE Instractiontbl(UNIQUEID integer primary key autoincrement, ID integer, LocationID varchar(5), regdate timestamp, Registrant varchar(100), Target varchar(100), Message varchar(1024),Replyname varchar(100),Replycomment varchar(1024), SolvedFlag varchar(1), Send varchar(2));""")
     cur.close()
 except:
     print
@@ -87,13 +90,25 @@ finally:
     form = cgi.FieldStorage()
     Key = form.keys()
     EditID = 0
+    Option = ""
 
     if len(Key)!=0:
-        if "Edit" in Key[0]:
-            if "Fin" in Key[0]:
-                EditID = 0
-            else:
-                EditID = int(Key[0].lstrip("Edit"))
+        if "Confirmation" in Key[0]:
+            ThisKey = int(Key[0].lstrip("Confirmation"))
+            cur = con.cursor()
+            try:
+                cur.execute("UPDATE Instractiontbl SET SolvedFlag='1' WHERE UNIQUEID=:uniqueid",{"uniqueid":ThisKey})
+                con.commit()
+            except:
+                con.rollback()
+            finally:
+                cur.close()
+        if "name" in Key:
+            Option = " WHERE Registrant='" + unicode(form.getfirst('name',''),'utf-8') + "' "
+            if "location" in Key:
+                Option += "AND Target='" + unicode(form.getfirst('target',''),'utf-8') + "' "
+        elif "target" in Key:
+            Option = " WHERE Target='" + unicode(form.getfirst('target',''),'utf-8') + "' "
 
     if form.getfirst('send') and form.has_key('send') and form.has_key('Registrant') and form.has_key('Message'):
         # nameが指定されていたらコメント登録
@@ -110,7 +125,7 @@ finally:
             if cur.fetchone() == None:
                 IDnum += 1
                 #cur.execute("INSERT INTO Instractiontbl(ID,LocationID,regdate,Registrant,Patient_Name,comment,SolvedFlag) values(?,'1',datetime('now','localtime'),?,?,?,'0')",(IDnum,Registrant,Patient_Name,comment))
-                cur.execute("INSERT INTO Instractiontbl(ID,LocationID,regdate,Class,Registrant,Target,Message) values(?,'1',datetime('now','localtime'),'Instraction',?,?,?)",(IDnum,Registrant,Target,Message))
+                cur.execute("INSERT INTO Instractiontbl(ID,LocationID,regdate,Registrant,Target,Message,Replyname,Replycomment,SolvedFlag) values(?,'1',datetime('now','localtime'),?,?,?,'','','0')",(IDnum,Registrant,Target,Message))
             con.commit()
         except:
             con.rollback()
@@ -120,35 +135,36 @@ finally:
     # 掲示板表示
     con.row_factory = sqlite3.Row
     cur = con.cursor()
+
     try:
-        cur.execute("SELECT * FROM Instractiontbl ORDER BY regdate DESC")
+        cur.execute("SELECT * FROM Instractiontbl %(Option)s ORDER BY regdate DESC"%{"Option":Option})
         print "<div class='scr'>"
         print "<dl>"
         for each in cur.fetchall():
-            print "<div id='MessageBgcolor'>"
-            if each['UNIQUEID'] == EditID:
-                print '''
-                    <form method="POST" action="./pyboard.cgi" target="pyboard">
-                    <table>
-                    <tr>
-                    <td><b>記入者の名前:</b></td>
-                    <td><input type="text" name=%(Registrant)s size="10"></td>
-                    <td><b>宛先:</b></td>
-                    <td><input type="text" name="Target" size="10" value=%(Target)s></td>
-                    </tr>
-                    </table>
-                    <table>
-                    <tr>
-                    <td><b>傷病者名:</b>
-                    <textarea cols="50" rows="5" name="Message" >救護所1設営完了</textarea></td>
-                    <tr>
-                    <td colspan="2"><input type="submit" name="send" value="Send"><input type="reset" value="Reset"></td>
-                    </tr>
-                    </table>
-                    </form>
-                    '''%{'Registrant':each['Registrant'].encode('utf-8'),'Message':each['Message'].encode('utf-8'),'Target':each['Target'].encode('utf-8')}
-            else:
-                print message%{'ID':each['UNIQUEID'],'LocationID':each['LocationID'],'Registrant':each['Registrant'].encode('utf-8'),'Target':each['Target'].encode('utf-8'),'regdate':each['regdate'].encode('utf-8'),'Message':each['Message'].encode('utf-8'),'EditButton':"Edit"+str(each['UNIQUEID'])}
+            print "<div id='BLACK'>" if each['SolvedFlag'] == '1' else "<div id='MessageBgcolor'>"
+            # if each['UNIQUEID'] == EditID:
+            #     print '''
+            #         <form method="POST" action="./pyboard.cgi" target="pyboard">
+            #         <table>
+            #         <tr>
+            #         <td><b>記入者の名前:</b></td>
+            #         <td><input type="text" name=%(Registrant)s size="10"></td>
+            #         <td><b>宛先:</b></td>
+            #         <td><input type="text" name="Target" size="10" value=%(Target)s></td>
+            #         </tr>
+            #         </table>
+            #         <table>
+            #         <tr>
+            #         <td><b>傷病者名:</b>
+            #         <textarea cols="50" rows="5" name="Message" >救護所1設営完了</textarea></td>
+            #         <tr>
+            #         <td colspan="2"><input type="submit" name="send" value="Send"><input type="reset" value="Reset"></td>
+            #         </tr>
+            #         </table>
+            #         </form>
+            #         '''%{'Registrant':each['Registrant'].encode('utf-8'),'Message':each['Message'].encode('utf-8'),'Target':each['Target'].encode('utf-8')}
+            # else:
+            print message%{'ID':each['UNIQUEID'],'LocationID':each['LocationID'],'Registrant':each['Registrant'].encode('utf-8'),'Target':each['Target'].encode('utf-8'),'regdate':each['regdate'].encode('utf-8'),'Message':each['Message'].encode('utf-8'),'ConfirmationButton':"Confirmation"+str(each['UNIQUEID'])}
             print "</div>"
             print "</dl>"
 

@@ -135,9 +135,9 @@ class ViewController: UIViewController,NSURLSessionDelegate,NSURLSessionDataDele
     func Recievebutton(sender:UIButton){
         println("ReciveButton")
         if sender.tag == 2{
-            RecieveIPAddress = "169.254.143.4:8080/cgi-bin"
+            RecieveIPAddress = "localhost:8080/cgi-bin"
         }else if sender.tag == 3{
-            RecieveIPAddress = "192.168.42.1:8000/cgi-bin"
+            RecieveIPAddress = "localhost:8000/cgi-bin"
         }
         connectR(RecieveIPAddress)
     }
@@ -146,9 +146,9 @@ class ViewController: UIViewController,NSURLSessionDelegate,NSURLSessionDataDele
         println("SendButton")
         var SendIPAddress = ""
         if sender.tag == 2{
-            SendIPAddress = "169.254.143.4:8080/cgi-bin"
+            SendIPAddress = "localhost:8080/cgi-bin"
         }else if sender.tag == 3{
-            SendIPAddress = "192.168.42.1:8000/cgi-bin"
+            SendIPAddress = "localhost:8000/cgi-bin"
         }
         connectS(SendIPAddress)
     }
@@ -224,10 +224,10 @@ class ViewController: UIViewController,NSURLSessionDelegate,NSURLSessionDataDele
             println("Not Input")
             return
         }
-        let Address = "localhost:8000/cgi-bin"
+//        let Address = "localhost:8000/cgi-bin"
         
         var URL:String! = "http://" + RecieveIPAddress + "/SendDB.py"
-        URL = "http://localhost:8000/cgi-bin/SendDB.py"
+//        URL = "http://localhost:8080/cgi-bin/SendDB.py"
         
         var myUrl:NSURL = NSURL(string: URL)!
         
@@ -249,10 +249,10 @@ class ViewController: UIViewController,NSURLSessionDelegate,NSURLSessionDataDele
             return
         }
         
-        let Address = "localhost:8000/cgi-bin"
+//        let Address = "localhost:8000/cgi-bin"
         
         var URL:String = "http://" + SendIPAddress + "/ReceveDB.py"
-        URL = "http://localhost:8000/cgi-bin/ReceveDB.py"
+//        URL = "http://localhost:8080/cgi-bin/ReceveDB.py"
         
 //        println(URL)
         
@@ -292,8 +292,20 @@ class ViewController: UIViewController,NSURLSessionDelegate,NSURLSessionDataDele
                 }
 
             }else if SendDatacount == 1{
-                for i in 0..<(FinData.count/5){
-                    var str = "ID=\(FinData[0+i*5])&LocationID=\(FinData[1+i*5])&Registrant=\(FinData[2+i*5])&Class=Chronology&regdate=\(FinData[3+i*5])&Message=\(FinData[4+i*5])" as NSString
+                for i in 0..<(FinData.count/6){
+                    var str = "ID=\(FinData[0+i*6])&LocationID=\(FinData[1+i*6])&Registrant=\(FinData[2+i*6])&Class=Chronology&regdate=\(FinData[3+i*6])&Message=\(FinData[4+i*6])&Tag=\(FinData[5+i*6])" as NSString
+                    println(str)
+                    let myData:NSData = str.dataUsingEncoding(NSUTF8StringEncoding)!
+                    myRequest.HTTPBody = myData
+                    
+                    // タスクの生成.
+                    let myTask:NSURLSessionDataTask = mySession.dataTaskWithRequest(myRequest)
+                    // タスクの実行.
+                    myTask.resume()
+                }
+            }else if SendDatacount == 2{
+                for i in 0..<(FinData.count/9){
+                    var str = "ID=\(FinData[0+i*9])&LocationID=\(FinData[1+i*9])&Registrant=\(FinData[2+i*9])&Class=Instraction&Target=\(FinData[3+i*9])&regdate=\(FinData[4+i*9])&Message=\(FinData[5+i*9])&SolvedFlag=\(FinData[6+i*9])&Replyname=\(FinData[7+i*9])&Replycomment=\(FinData[8+i*9])" as NSString
                     println(str)
                     let myData:NSData = str.dataUsingEncoding(NSUTF8StringEncoding)!
                     myRequest.HTTPBody = myData
@@ -304,8 +316,8 @@ class ViewController: UIViewController,NSURLSessionDelegate,NSURLSessionDataDele
                     myTask.resume()
                 }
             }else{
-                for i in 0..<(FinData.count/6){
-                    var str = "ID=\(FinData[0+i*6])&LocationID=\(FinData[1+i*6])&Registrant=\(FinData[2+i*6])&Class=Instraction&Target=\(FinData[3+i*6])&regdate=\(FinData[4+i*6])&Message=\(FinData[5+i*6])" as NSString
+                for i in 0..<(FinData.count/9){
+                    var str = "ID=\(FinData[0+i*9])&genre=\(FinData[1+i*9])&LocationID=\(FinData[2+i*9])&Class=Victor&name=\(FinData[3+i*9])&regdate=\(FinData[4+i*9])&comment=\(FinData[5+i*9])&SolvedFlag=\(FinData[6+i*9])&Replyname=\(FinData[7+i*9])&Replycomment=\(FinData[8+i*9])" as NSString
                     println(str)
                     let myData:NSData = str.dataUsingEncoding(NSUTF8StringEncoding)!
                     myRequest.HTTPBody = myData

@@ -17,7 +17,7 @@ con = sqlite3.connect("board.db")
 try:
     # DB作成
     cur = con.cursor()
-    cur.executescript("""CREATE TABLE boardtbl(UNIQUEID integer primary key autoincrement, ID integer, LocationID varchar(5), Genre varchar(10), regdate timestamp,name varchar(100),comment varchar(1024),Replyname varchar(100),Replycomment varchar(1024),SolvedFlag varchar(1));""")
+    cur.executescript("""CREATE TABLE Victortbl(UNIQUEID integer primary key autoincrement, ID integer, LocationID varchar(5), Genre varchar(10), regdate timestamp,name varchar(100),comment varchar(1024),Replyname varchar(100),Replycomment varchar(1024),SolvedFlag varchar(1));""")
     cur.close()
 except:
     print
@@ -38,12 +38,14 @@ finally:
         Replycomment = unicode(form.getfirst('Replycomment',''),'utf-8')
         cur = con.cursor()
         try:
-            cur.execute("SELECT * FROM boardtbl WHERE ID=:id AND LocationID=:locationid",{"id":ID, "locationid":LocationID})
+            cur.execute("SELECT * FROM Victortbl WHERE ID=:id AND LocationID=:locationid",{"id":ID, "locationid":LocationID})
             if cur.fetchone() != None:
-                cur.execute("UPDATE boardtbl SET SolvedFlag='1' WHERE SolvedFlag!=:solvedflag AND ID=:id",{"solvedflag":SolvedFlag, "id":ID})
+                cur.execute("UPDATE Victortbl SET SolvedFlag='1' WHERE SolvedFlag!=:solvedflag AND ID=:id",{"solvedflag":SolvedFlag, "id":ID})
+                cur.execute("UPDATE Victortbl SET Replyname=:Replyname WHERE ID=:ID AND LocationID=:LoactionID",{"Replyname":Replyname, "ID":ID, "LocationID":LocationID})
+                cur.execute("UPDATE Victortbl SET Replycomment=:Replycomment WHERE ID=:ID AND LocationID=:LoactionID",{"Replycomment":Replycomment, "ID":ID, "LocationID":LocationID})
                 print "update"
             else:
-                cur.execute("INSERT INTO boardtbl(ID,LocationID,Genre,regdate,name,comment,Replyname,Replycomment,SolvedFlag) values(?,?,?,?,?,?,?,?,?)",(ID,LocationID,genre,time,name,comment,Replyname,Replycomment,SolvedFlag))
+                cur.execute("INSERT INTO Victortbl(ID,LocationID,Genre,regdate,name,comment,Replyname,Replycomment,SolvedFlag) values(?,?,?,?,?,?,?,?,?)",(ID,LocationID,genre,time,name,comment,Replyname,Replycomment,SolvedFlag))
                 print "insert"
             con.commit()
         except:

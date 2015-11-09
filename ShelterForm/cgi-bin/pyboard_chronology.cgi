@@ -50,9 +50,13 @@ print '''
             background-color: #0055AA;
         }
 
-        #MessageBgcolor{
+        #Shelter_Bgcolor{
+          background-color: #FFCC66;
+        }
+        #Patient_Bgcolor{
           background-color: #55FF88;
         }
+
 
     </style>
     　
@@ -62,23 +66,24 @@ print '''
     '''
 
 message = '''
-    <dt id="Title"><hr />ID: %(ID)s, %(regdate)s 場所ID: %(LocationID)s 記入者: %(Registrant)s</dt><br>
+    <dt id="Title"><hr />ID: %(ID)s, %(regdate)s 場所ID: %(LocationID)s 記入者: %(Registrant)s Tag: %(Tag)s</dt><br>
     <dd id="Message">
     %(Message)s
     </dd><br>
     <dd id="Date">
-    <form>
-    <input type="submit" name=%(EditButton)s value="Edit">
-    </form>
     </dd>
     '''
+
+    # <form>
+    # <input type="submit" name=%(EditButton)s value="Edit">
+    # </form>
 
 con = sqlite3.connect("board.db")
 
 try:
     # DB作成
     cur = con.cursor()
-    cur.executescript("""CREATE TABLE Chronologytbl(UNIQUEID integer primary key autoincrement, ID integer, LocationID varchar(5), regdate timestamp, Registrant varchar(100),  Message varchar(1024),Replyname varchar(100),Replycomment varchar(1024));""")
+    cur.executescript("""CREATE TABLE Chronologytbl(UNIQUEID integer primary key autoincrement, ID integer, LocationID varchar(5), regdate timestamp, Registrant varchar(100),  Message varchar(1024),Replyname varchar(100),Replycomment varchar(1024),Tag varchar(50), Send varchar(2));""")
     cur.close()
 except:
     print
@@ -87,13 +92,35 @@ finally:
     form = cgi.FieldStorage()
     Key = form.keys()
     EditID = 0
+    Option = ""
+    Tag = ""
 
     if len(Key)!=0:
-        if "Edit" in Key[0]:
+        if "Edit" in Key[0] and "TAG" not in Key[0]:
             if "Fin" in Key[0]:
                 EditID = 0
             else:
                 EditID = int(Key[0].lstrip("Edit"))
+        if "name" in Key:
+            Option = " WHERE Registrant='" + unicode(form.getfirst('name',''),'utf-8') + "' "
+            if "location" in Key:
+                Option += "AND LocationID=" + unicode(form.getfirst('location',''),'utf-8') + " "
+        elif "location" in Key:
+            Option = " WHERE LocationID=" + unicode(form.getfirst('location',''),'utf-8') + " "
+
+    if form.has_key('TAGInfo_Shelter'):
+        Tag = " Tag = '救護所情報' OR "
+    if form.has_key('TAGEdit_Patient'):
+        Tag = " Tag = '傷病者情報編集' OR "
+    if Tag != "":
+        Tag = Tag.rstrip("OR ")
+        Tag = "( " + Tag + " ) "
+
+        if Option != "":
+            Option += " AND " + Tag
+        else:
+            Option = " WHERE" + Tag
+
 
     if form.getfirst('send') and form.has_key('send') and form.has_key('Registrant') and form.has_key('Message'):
         # nameが指定されていたらコメント登録
@@ -105,11 +132,10 @@ finally:
             cur.execute("SELECT count(*) FROM Chronologytbl WHERE LocationID='1' ")
             IDnum = cur.fetchone()[0]
             cur.execute("SELECT * FROM Chronologytbl WHERE ID=:id AND Registrant=:Registrant AND Message=:Message",{"id":IDnum,"Registrant":Registrant,"Message":Message})
-
             if cur.fetchone() == None:
                 IDnum += 1
                 #cur.execute("INSERT INTO Chronologytbl(ID,LocationID,regdate,Registrant,Patient_Name,comment,SolvedFlag) values(?,'1',datetime('now','localtime'),?,?,?,'0')",(IDnum,Registrant,Patient_Name,comment))
-                cur.execute("INSERT INTO Chronologytbl(ID,LocationID,regdate,Class,Registrant,Message) values(?,'1',datetime('now','localtime'),'Chronology',?,?)",(IDnum,Registrant,Message))
+                cur.execute("INSERT INTO Chronologytbl(ID,LocationID,regdate,Registrant,Message,Tag) values(?,'1',datetime('now','localtime'),?,?,'救護所情報')",(IDnum,Registrant,Message))
             con.commit()
         except:
             con.rollback()
@@ -120,11 +146,11 @@ finally:
     con.row_factory = sqlite3.Row
     cur = con.cursor()
     try:
-        cur.execute("SELECT * FROM Chronologytbl ORDER BY regdate DESC")
+        cur.execute("SELECT * FROM Chronologytbl %(Option)s ORDER BY regdate DESC"%{"Option":Option})
         print "<div class='scr'>"
         print "<dl>"
         for each in cur.fetchall():
-            print "<div id='MessageBgcolor'>"
+            print "<div id='Shelter_Bgcolor'>" if each['Tag'] == '救護所情報' else "<div id='Patient_Bgcolor'>"
             if each['UNIQUEID'] == EditID:
                 # print message%{'ID':each['UNIQUEID'],'LocationID':each['LocationID'],'Registrant':each['Registrant'].encode('utf-8'),'regdate':each['regdate'].encode('utf-8'),'Patient_Name':each['Patient_Name'].encode('utf-8'),'Patient_Age':each['Patient_Age'].encode('utf-8'),'Patient_Gender':each['Patient_Gender'].encode('utf-8'),'Patient_Triage':each['Patient_Triage'].encode('utf-8'),'Patient_Injuries_Diseases':each['Patient_Injuries_Diseases'].encode('utf-8'),'Patient_Treatment':each['Patient_Treatment'].encode('utf-8'),'Patient_Hospital':each['Patient_Hospital'].encode('utf-8'),'comment':each['comment'].encode('utf-8'),'EditButton':"FinEdit"+str(each['UNIQUEID'])}
                 print '''
@@ -146,7 +172,8 @@ finally:
                     </form>
                     '''%{'Registrant':each['Registrant'].encode('utf-8'),'Message':each['Message'].encode('utf-8')}
             else:
-                print message%{'ID':each['UNIQUEID'],'LocationID':each['LocationID'],'Registrant':each['Registrant'].encode('utf-8'),'regdate':each['regdate'].encode('utf-8'),'Message':each['Message'].encode('utf-8'),'EditButton':"Edit"+str(each['UNIQUEID'])}
+                print message%{'ID':each['UNIQUEID'],'LocationID':each['LocationID'],'Registrant':each['Registrant'].encode('utf-8'),'regdate':each['regdate'].encode('utf-8'),'Message':each['Message'].encode('utf-8'),'Tag':each['Tag'].encode('utf-8')}
+                # print message%{'ID':each['UNIQUEID'],'LocationID':each['LocationID'],'Registrant':each['Registrant'].encode('utf-8'),'regdate':each['regdate'].encode('utf-8'),'Message':each['Message'].encode('utf-8'),'Tag':each['Tag'].encode('utf-8'),'EditButton':"Edit"+str(each['UNIQUEID'])}
             print "</div>"
             print "</dl>"
 

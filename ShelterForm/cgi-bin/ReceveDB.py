@@ -7,7 +7,6 @@ import os
 import sqlite3
 from datetime import datetime as dt
 
-
 cgitb.enable()
 
 print "Content-type: text/plain"
@@ -85,9 +84,18 @@ finally:
 
         elif form["Class"].value == 'Instraction':
             print "Instraction"
+            ReplyName = ''
+            ReplyComment = ''
+
             Registrant = form['Registrant'].value
             Target = form['Target'].value
             Message = form['Message'].value
+            SolvedFlag = form["SolvedFlag"].value
+            if form.has_key('Replyname'):
+                ReplyName = form['Replyname'].value
+            if form.has_key('Replycomment'):
+                ReplyComment = form['Replycomment'].value
+
             # print ID,LocationID,regdate,Registrant,Target,Message
             try:
                 cur.execute("SELECT * FROM Instractiontbl WHERE ID=:id AND LocationID=:locationid",{"id":ID, "locationid":LocationID})
@@ -95,7 +103,7 @@ finally:
                     cur.execute("UPDATE Instractiontbl SET SolvedFlag='1' WHERE SolvedFlag!=:solvedflag AND ID=:id",{"solvedflag":SolvedFlag, "id":ID})
                     print "update"
                 else:
-                    cur.execute("INSERT INTO Instractiontbl(ID,LocationID,regdate,Registrant,Target,Message) values(?,?,?,?,?,?)",(ID,LocationID,regdate,Registrant.decode('utf-8'),Target.decode('utf-8'),Message.decode('utf-8')))
+                    cur.execute("INSERT INTO Instractiontbl(ID,LocationID,regdate,Registrant,Target,Message,SolvedFlag,Replyname,Replycomment) values(?,?,?,?,?,?,?,?,?)",(ID,LocationID,regdate,Registrant.decode('utf-8'),Target.decode('utf-8'),Message.decode('utf-8'),SolvedFlag,ReplyName.decode('utf-8'),ReplyComment.decode('utf-8')))
                     # cur.execute("INSERT INTO Instractiontbl(ID,LocationID,regdate,Registrant,Target,Message) values(?,?,?,?,?,?)",(ID,LocationID,regdate,Registrant.decode('utf-8'),Target.decode('utf-8'),Message.decode('utf-8')))
                     print "insert"
                 con.commit()

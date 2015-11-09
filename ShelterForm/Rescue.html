@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="ja">
+  <head>
+    <META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=UTF-8">
+    <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+    <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
+    <link rel="stylesheet" type="text/css" href="Rescue.css">
+    <title>Sample</title>　
+  </head>
+
+  <body>
+    <div class="contents">
+      <center><H1>避難所1　掲示板</H1>
+        <a href="index.html"><button>戻る</button></a>
+      <div class="menu">
+        <form method="POST" action="http://localhost:8000/cgi-bin/pyboard_Rescue.cgi" target="pyboard_Rescue">
+        <button type="submit" name="Menu" value="Patient" style="height: 50px; width: 246px; margin:0 0;">傷病者情報</button>
+        <button type="submit" name="Menu" value="Chronology" style="height: 50px; width: 247px; margin:0 0;">クロノロジー</button>
+        <button type="submit" name="Menu" value="Instraction" style="height: 50px; width: 246px; margin:0 0;">指示</button>
+        </form>
+      </div>
+      </center>
+      <!-- <div class="option">
+        <form method="POST" action="pyboardMain.py" target="pyboardMain" >
+          <br>
+              トリアージ:<br>
+          <input type="radio" name="TAG" value="ALL" style-"margin-left: 5px;" id="TagALL" checked/>
+          <label for="TagALL">ALL</label><br>
+          <input type="radio" name="TAG" value="Black" style-"margin-left: 5px;" id="TagRescue"/>
+          <label for="TagRescue">黒</label><br>
+          <input type="radio" name="TAG" value="Red" style-"margin-left: 5px;" id="TagGoods"/>
+          <label for="TagGoods">赤</label><br>
+          <input type="radio" name="TAG" value="Yellow" style-"margin-left: 5px;" id="TagGoods"/>
+          <label for="TagGoods">黄</label><br>
+          <input type="radio" name="TAG" value="Green" style-"margin-left: 5px;" id="TagGoods"/>
+          <label for="TagGoods">緑</label><br>
+              Soloved:<br>
+          <input type="radio" name="SOLVE" value="ALL" style-"margin-left: 5px;" id="SolveALL" checked/>
+          <label for="SolveALL">ALL</label><br>
+          <input type="radio" name="SOLVE" value="Resolve" style-"margin-left: 5px;" id="SolveResolve"/>
+          <label for="SolveResolve">Resolve</label><br>
+          <input type="radio" name="SOLVE" value="Unsolved" style-"margin-left: 5px;" id="SolveUnsolved"/>
+          <label for="SolveUnsolved">Unsolved</label><br><br>
+
+          <button type="submit" style="margin-left: 5px; width: 90px; height: 30px;">変更</button>
+        </form>
+      </div>
+
+      <form method="POST" action="http://localhost:8000/cgi-bin/pyboard.cgi" target="pyboard">
+        <table>
+          <tr>
+          <td><b>記入者の名前:</b></td>
+          <td><input type="text" name="Registrant" size="10" value="山田"></td>
+          </tr>
+        </table>
+        <table>
+          <tr>
+          <td><b>傷病者名:</b>
+          <textarea cols="10" rows="1" name="Patient_Name" >佐藤</textarea></td>
+          <td><b>年齢:</b>
+          <textarea cols="5" rows="1" name="Patient_Age" >22</textarea></td>
+          <td><b>性別:</b>
+            <input type="radio" name="Patient_Gender" value="男" checked>男
+            <input type="radio" name="Patient_Gender" value="女">女
+          </td>
+          <td><b>トリアージ区分:</b>
+            <input type="radio" name="Patient_Triage" value="black" checked>黒
+            <input type="radio" name="Patient_Triage" value="red">赤
+            <input type="radio" name="Patient_Triage" value="yellow">黄
+            <input type="radio" name="Patient_Triage" value="green">緑
+          </td>
+        </table>
+        <table>
+          <tr>
+          <td><b>傷病名:</b>
+          <textarea cols="20" rows="3" name="Patient_Injuries_Diseases" >左足の骨折</textarea></td>
+          <td><b>行った処置:</b>
+          <textarea cols="20" rows="3" name="Patient_Treatment" >副木</textarea></td>
+          <td><b>搬送先病院:</b>
+          <textarea cols="20" rows="3" name="Patient_Hospital" >琵琶湖病院</textarea></td>
+          <td><b>備考:</b>
+          <textarea cols="20" rows="3" name="comment" >特になし</textarea></td>
+          </tr>
+          <tr>
+          <td colspan="2"><input type="submit" name="send" value="Send"><input type="reset" value="Reset"></td>
+          </tr>
+        </table>
+      </form>
+      <div class="main">
+        <iframe name="pyboard" src="http://localhost:8000/cgi-bin/pyboard.cgi" width="100%" height="3000px" frameborder="0" />
+      </div>
+    </div> -->
+
+    <iframe name="pyboard_Rescue" src="http://localhost:8000/cgi-bin/pyboard_Rescue.cgi" width="100%" height="3000px" frameborder="0" />
+  </body>
+</html>

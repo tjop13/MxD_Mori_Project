@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>1535FA37-63D2-48FF-AC61-3AE6985CC5A7</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>pyboard</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>E0EEE36A7F4DA8C16FB19C136D29986BECDE88C2</key>
 		<string>https://github.com/tjop13/MxD_Mori_Project.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>carrier_iOS/pyboard.xcodeproj/project.xcworkspace</string>
+	<string>carrier_iOS/pyboard.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>E0EEE36A7F4DA8C16FB19C136D29986BECDE88C2</key>
