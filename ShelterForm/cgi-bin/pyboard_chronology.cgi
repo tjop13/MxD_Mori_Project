@@ -5,6 +5,8 @@ import cgi
 import cgitb
 import sqlite3
 
+import unicodedata
+
 import sys
 reload(sys)
 sys.setdefaultencoding('utf-8')
@@ -30,9 +32,8 @@ print '''
         }
         .scr {
           overflow: scroll;
-          margin-left: 20px;
-          width: 600px;
-          height: 500px;
+          width: 590px;
+          height: 1000px;
         }
 
         #Title{
@@ -102,7 +103,8 @@ finally:
             else:
                 EditID = int(Key[0].lstrip("Edit"))
         if "name" in Key:
-            Option = " WHERE Registrant='" + unicode(form.getfirst('name',''),'utf-8') + "' "
+            name = unicodedata.normalize('NFKC', unicode(form.getfirst('name',''),'utf-8'))
+            Option = " WHERE Registrant like '%" + name + "%' "
             if "location" in Key:
                 Option += "AND LocationID=" + unicode(form.getfirst('location',''),'utf-8') + " "
         elif "location" in Key:
@@ -111,7 +113,7 @@ finally:
     if form.has_key('TAGInfo_Shelter'):
         Tag = " Tag = '救護所情報' OR "
     if form.has_key('TAGEdit_Patient'):
-        Tag = " Tag = '傷病者情報編集' OR "
+        Tag += " Tag = '傷病者情報編集' OR "
     if Tag != "":
         Tag = Tag.rstrip("OR ")
         Tag = "( " + Tag + " ) "
@@ -120,7 +122,6 @@ finally:
             Option += " AND " + Tag
         else:
             Option = " WHERE" + Tag
-
 
     if form.getfirst('send') and form.has_key('send') and form.has_key('Registrant') and form.has_key('Message'):
         # nameが指定されていたらコメント登録
@@ -135,7 +136,7 @@ finally:
             if cur.fetchone() == None:
                 IDnum += 1
                 #cur.execute("INSERT INTO Chronologytbl(ID,LocationID,regdate,Registrant,Patient_Name,comment,SolvedFlag) values(?,'1',datetime('now','localtime'),?,?,?,'0')",(IDnum,Registrant,Patient_Name,comment))
-                cur.execute("INSERT INTO Chronologytbl(ID,LocationID,regdate,Registrant,Message,Tag) values(?,'1',datetime('now','localtime'),?,?,'救護所情報')",(IDnum,Registrant,Message))
+                cur.execute("INSERT INTO Chronologytbl(ID,LocationID,regdate,Registrant,Message,Tag,Send) values(?,'1',datetime('now','localtime'),?,?,'救護所情報','1')",(IDnum,Registrant,Message))
             con.commit()
         except:
             con.rollback()

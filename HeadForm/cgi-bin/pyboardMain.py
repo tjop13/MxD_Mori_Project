@@ -124,7 +124,7 @@ def PyBoardData():
                 ThisKey = int(Key[0].lstrip("Resolution"))
                 cur = con.cursor()
                 try:
-                    cur.execute("UPDATE Victortbl SET SolvedFlag='1' WHERE UNIQUEID=:uniqueid",{"uniqueid":ThisKey})
+                    cur.execute("UPDATE Victortbl SET SolvedFlag='1', Send='1' WHERE UNIQUEID=:uniqueid",{"uniqueid":ThisKey})
                     con.commit()
                 except:
                     con.rollback()
@@ -144,7 +144,7 @@ def PyBoardData():
                 ReplyName =  unicode(form.getfirst('Replyname',''),'utf-8')
                 ReplyComment = unicode(form.getfirst('Replycomment',''),'utf-8')
                 ThisKey = int(Key[0].lstrip("send"))
-                cur.execute("UPDATE Victortbl SET Replyname=:name, Replycomment=:comment WHERE UNIQUEID=:uniqueid",{'name':ReplyName, 'comment':ReplyComment, 'uniqueid':ThisKey})
+                cur.execute("UPDATE Victortbl SET Replyname=:name, Replycomment=:comment, Send='1' WHERE UNIQUEID=:uniqueid",{'name':ReplyName, 'comment':ReplyComment, 'uniqueid':ThisKey})
 
                 con.commit()
         except:

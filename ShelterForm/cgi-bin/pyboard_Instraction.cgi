@@ -5,6 +5,8 @@ import cgi
 import cgitb
 import sqlite3
 
+import unicodedata
+
 import sys
 reload(sys)
 sys.setdefaultencoding('utf-8')
@@ -26,13 +28,11 @@ print '''
     <style type="text/css">
         body{
           background-color: #FFEEDC;
-
         }
         .scr {
           overflow: scroll;
-          margin-left: 20px;
-          width: 600px;
-          height: 500px;
+          width: 590px;
+          height: 1000px;
         }
 
         #Title{
@@ -97,24 +97,28 @@ finally:
             ThisKey = int(Key[0].lstrip("Confirmation"))
             cur = con.cursor()
             try:
-                cur.execute("UPDATE Instractiontbl SET SolvedFlag='1' WHERE UNIQUEID=:uniqueid",{"uniqueid":ThisKey})
+                cur.execute("UPDATE Instractiontbl SET SolvedFlag='1', Send='1' WHERE UNIQUEID=:uniqueid",{"uniqueid":ThisKey})
                 con.commit()
             except:
                 con.rollback()
             finally:
                 cur.close()
         if "name" in Key:
-            Option = " WHERE Registrant='" + unicode(form.getfirst('name',''),'utf-8') + "' "
+            name = unicodedata.normalize('NFKC', unicode(form.getfirst('name',''),'utf-8'))
+            target = unicodedata.normalize('NFKC', unicode(form.getfirst('target',''),'utf-8'))
+            # name = unicodedata.normalize('NFKC', form.getfirst('name',''),'utf-8')
+            Option = " WHERE Registrant like '%" + name + "%' "
             if "location" in Key:
-                Option += "AND Target='" + unicode(form.getfirst('target',''),'utf-8') + "' "
+                Option += "AND Target like '%" + target + "%' "
         elif "target" in Key:
-            Option = " WHERE Target='" + unicode(form.getfirst('target',''),'utf-8') + "' "
+            target = unicodedata.normalize('NFKC', unicode(form.getfirst('target',''),'utf-8'))
+            Option = " WHERE Target like '%" + target + "%' "
 
     if form.getfirst('send') and form.has_key('send') and form.has_key('Registrant') and form.has_key('Message'):
         # nameが指定されていたらコメント登録
-        Registrant = unicode(form.getfirst('Registrant',''),'utf-8')
+        Registrant = unicodedata.normalize('NFKC', unicode(form.getfirst('Registrant',''),'utf-8'))
         Message = unicode(form.getfirst('Message',''),'utf-8')
-        Target = unicode(form.getfirst('Target',''),'utf-8')
+        Target = unicodedata.normalize('NFKC', unicode(form.getfirst('Target',''),'utf-8'))
         cur = con.cursor()
         # print Registrant,Patient_Name,Patient_Age,Patient_Gender,Patient_Triage,Patient_Injuries_Diseases,Patient_Treatment,Patient_Hospital,comment
         try:
@@ -125,7 +129,7 @@ finally:
             if cur.fetchone() == None:
                 IDnum += 1
                 #cur.execute("INSERT INTO Instractiontbl(ID,LocationID,regdate,Registrant,Patient_Name,comment,SolvedFlag) values(?,'1',datetime('now','localtime'),?,?,?,'0')",(IDnum,Registrant,Patient_Name,comment))
-                cur.execute("INSERT INTO Instractiontbl(ID,LocationID,regdate,Registrant,Target,Message,Replyname,Replycomment,SolvedFlag) values(?,'1',datetime('now','localtime'),?,?,?,'','','0')",(IDnum,Registrant,Target,Message))
+                cur.execute("INSERT INTO Instractiontbl(ID,LocationID,regdate,Registrant,Target,Message,Replyname,Replycomment,SolvedFlag,Send) values(?,'1',datetime('now','localtime'),?,?,?,'','','0','1')",(IDnum,Registrant,Target,Message))
             con.commit()
         except:
             con.rollback()

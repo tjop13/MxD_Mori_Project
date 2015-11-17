@@ -30,9 +30,8 @@ print '''
         }
         .scr {
           overflow: scroll;
-          margin-left: 20px;
-          width: 600px;
-          height: 500px;
+          width: 590px;
+          height: 1000px;
         }
 
         #Title{
@@ -151,7 +150,7 @@ finally:
                 Message = "項目：傷病者情報編集<br>傷病者名：" + Patient_Name + "<br>編集内容：" + unicode(form.getfirst('Message',''),'utf-8')
                 cur = con.cursor()
                 try:
-                    cur.execute("UPDATE Patienttbl SET Registrant=:Registrant ,Patient_Name=:Patient_Name ,Patient_Age=:Patient_Age ,Patient_Gender=:Patient_Gender ,Patient_Triage=:Patient_Triage ,Patient_Injuries_Diseases=:Patient_Injuries_Diseases ,Patient_Treatment=:Patient_Treatment ,Patient_Hospital=:Patient_Hospital,comment=:comment WHERE ID=:ID",{"Registrant":Registrant ,"Patient_Name":Patient_Name ,"Patient_Age":Patient_Age ,"Patient_Gender":Patient_Gender ,"Patient_Triage":Patient_Triage ,"Patient_Triage":Patient_Triage ,"Patient_Injuries_Diseases":Patient_Injuries_Diseases ,"Patient_Treatment":Patient_Treatment ,"Patient_Hospital":Patient_Hospital ,"comment":comment, "ID":ESubmitID})
+                    cur.execute("UPDATE Patienttbl SET Registrant=:Registrant ,Patient_Name=:Patient_Name ,Patient_Age=:Patient_Age ,Patient_Gender=:Patient_Gender ,Patient_Triage=:Patient_Triage ,Patient_Injuries_Diseases=:Patient_Injuries_Diseases ,Patient_Treatment=:Patient_Treatment ,Patient_Hospital=:Patient_Hospital,comment=:comment, Send='1' WHERE ID=:ID",{"Registrant":Registrant ,"Patient_Name":Patient_Name ,"Patient_Age":Patient_Age ,"Patient_Gender":Patient_Gender ,"Patient_Triage":Patient_Triage ,"Patient_Triage":Patient_Triage ,"Patient_Injuries_Diseases":Patient_Injuries_Diseases ,"Patient_Treatment":Patient_Treatment ,"Patient_Hospital":Patient_Hospital ,"comment":comment, "ID":ESubmitID})
                     con.commit()
                 except:
                     con.rollback()
@@ -166,7 +165,7 @@ finally:
                         if cur.fetchone() == None:
                             IDnum += 1
                             #cur.execute("INSERT INTO Chronologytbl(ID,LocationID,regdate,Registrant,Patient_Name,comment,SolvedFlag) values(?,'1',datetime('now','localtime'),?,?,?,'0')",(IDnum,Registrant,Patient_Name,comment))
-                            cur.execute("INSERT INTO Chronologytbl(ID,LocationID,regdate,Registrant,Message,Tag) values(?,'1',datetime('now','localtime'),?,?,'傷病者情報編集')",(IDnum,Registrant,Message))
+                            cur.execute("INSERT INTO Chronologytbl(ID,LocationID,regdate,Registrant,Message,Tag,Send) values(?,'1',datetime('now','localtime'),?,?,'傷病者情報編集','1')",(IDnum,Registrant,Message))
                         con.commit()
                     except:
                         con.rollback()

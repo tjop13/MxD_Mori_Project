@@ -51,7 +51,7 @@
         <br>
             名前検索:<br>
         <input type="text" name="name" size="13" value="">
-            タグ:<br>
+            <br>タグ:<br>
         <input type="checkbox" name="TAGRescue" value="Black" style-"margin-left: 5px;" id="TagRescue"/>
         <label for="TagRescue">救急</label><br>
         <input type="checkbox" name="TAGGoods" value="Red" style-"margin-left: 5px;" id="TagGoods"/>
@@ -63,7 +63,7 @@
       </form>
     </div>
     <div class="main">
-    <form method="POST" action="http://localhost:8000/cgi-bin/pyboard_Victor.cgi" target="pyboard_Victor">
+    <form method="POST" action="http://192.168.42.1:8000/cgi-bin/pyboard_Victor.cgi" target="pyboard_Victor">
     <table>
     <tr>
     <td><b>Name:</b></td>
@@ -85,7 +85,7 @@
     </tr>
     </table>
     </form>
-    <iframe name="pyboard_Victor" src="http://localhost:8000/cgi-bin/pyboard_Victor.cgi" width="100%" height="3000px" frameborder="0" />
+    <iframe name="pyboard_Victor" src="http://192.168.42.1:8000/cgi-bin/pyboard_Victor.cgi" width="100%" height="1500px" frameborder="0" />
   </div>
   </div>
   </body>

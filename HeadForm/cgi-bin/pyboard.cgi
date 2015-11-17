@@ -171,8 +171,26 @@ def PyBoard():
 
                  <button type="submit" style="margin-left: 5px; width: 90px; height: 30px;">変更</button>
                 </form>
+
                 </div>
                 <div class="main">
+                <form method="POST" action="http://localhost:8080/cgi-bin/pyboard_chronology.py" target="pyboard_Chronology">
+                  <table>
+                    <tr>
+                    <td><b>記入者の名前:</b></td>
+                    <td><input type="text" name="Registrant" size="10"></td>
+                    </tr>
+                  </table>
+                <table>
+                  <tr>
+                  <td><b>内容:</b>
+                  <textarea cols="50" rows="5" name="Message" ></textarea></td>
+                  </tr>
+                  <tr>
+                  <td colspan="2"><input type="submit" name="send" value="Send"><input type="reset" value="Reset"></td>
+                  </tr>
+                </table>
+                </form>
                 <iframe name="pyboard_Chronology" width="100%" height="1000px" src="pyboard_Chronology.py" frameborder="0" />
                 '''
             elif form.getfirst('Menu','') == "Instraction":
@@ -234,6 +252,23 @@ def PyBoard():
             </form>
             </div>
             <div class="main">
+            <form method="POST" action="http://localhost:8080/cgi-bin/pyboard_chronology.py" target="pyboard_Chronology">
+              <table>
+                <tr>
+                <td><b>記入者の名前:</b></td>
+                <td><input type="text" name="Registrant" size="10"></td>
+                </tr>
+              </table>
+            <table>
+              <tr>
+              <td><b>内容:</b>
+              <textarea cols="50" rows="5" name="Message" ></textarea></td>
+              </tr>
+              <tr>
+              <td colspan="2"><input type="submit" name="send" value="Send"><input type="reset" value="Reset"></td>
+              </tr>
+            </table>
+            </form>
             <iframe name="pyboard_Chronology" width="100%" height="1000px" src="pyboard_Chronology.py" frameborder="0" />
             '''
 

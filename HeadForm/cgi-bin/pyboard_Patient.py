@@ -146,7 +146,7 @@ def PyBoardData():
                 ThisKey = int(Key[0].lstrip("Resolution"))
                 cur = con.cursor()
                 try:
-                    cur.execute("UPDATE Patienttbl SET SolvedFlag='1' WHERE UNIQUEID=:uniqueid",{"uniqueid":ThisKey})
+                    cur.execute("UPDATE Patienttbl SET SolvedFlag='1', Send='1' WHERE UNIQUEID=:uniqueid",{"uniqueid":ThisKey})
                     con.commit()
                 except:
                     con.rollback()

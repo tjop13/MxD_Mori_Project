@@ -8,6 +8,8 @@ import sqlitebck
 import threading
 import CheckDB
 
+import unicodedata
+
 import sys
 reload(sys)
 sys.setdefaultencoding('utf-8')
@@ -128,20 +130,25 @@ def PyBoardData():
                 ThisKey = int(Key[0].lstrip("Resolution"))
                 cur = con.cursor()
                 try:
-                    cur.execute("UPDATE Instractiontbl SET SolvedFlag='1' WHERE UNIQUEID=:uniqueid",{"uniqueid":ThisKey})
+                    cur.execute("UPDATE Instractiontbl SET SolvedFlag='1', Send='1' WHERE UNIQUEID=:uniqueid",{"uniqueid":ThisKey})
                     con.commit()
                 except:
                     con.rollback()
                 finally:
                     cur.close()
             if "name" in Key:
-                Option = " WHERE Registrant='" + unicode(form.getfirst('name',''),'utf-8') + "' "
-                if "location" in Key:
-                    Option += "AND Target='" + unicode(form.getfirst('target',''),'utf-8') + "' "
+                name = unicodedata.normalize('NFKC', unicode(form.getfirst('name',''),'utf-8'))
+                target = unicodedata.normalize('NFKC', unicode(form.getfirst('target',''),'utf-8'))
+                Option = " WHERE Registrant like '%" + name + "%' "
+                if "Target" in Key:
+                    Option += "AND Target like '%" + target + "%' "
                     if "location" in Key:
                         Option += "AND LocationID=" + unicode(form.getfirst('location',''),'utf-8') + " "
+                elif "location" in Key:
+                    Option += "AND LocationID=" + unicode(form.getfirst('location',''),'utf-8') + " "
             elif "target" in Key:
-                Option = " WHERE Target='" + unicode(form.getfirst('target',''),'utf-8') + "' "
+                target = unicodedata.normalize('NFKC', unicode(form.getfirst('target',''),'utf-8'))
+                Option = " WHERE Target like '%" + target + "%' "
                 if "location" in Key:
                     Option += "AND LocationID=" + unicode(form.getfirst('location',''),'utf-8') + " "
             elif "location" in Key:
@@ -162,7 +169,7 @@ def PyBoardData():
                 if cur.fetchone() == None:
                     IDnum += 1
                     #cur.execute("INSERT INTO Instractiontbl(ID,LocationID,regdate,Registrant,Patient_Name,comment,SolvedFlag) values(?,'1',datetime('now','localtime'),?,?,?,'0')",(IDnum,Registrant,Patient_Name,comment))
-                    cur.execute("INSERT INTO Instractiontbl(ID,LocationID,regdate,Registrant,Target,Message,SolvedFlag) values(?,'H',datetime('now','localtime'),?,?,?,'0')",(IDnum,Registrant,Target,Message))
+                    cur.execute("INSERT INTO Instractiontbl(ID,LocationID,regdate,Registrant,Target,Message,SolvedFlag,Send) values(?,'H',datetime('now','localtime'),?,?,?,'0','1')",(IDnum,Registrant,Target,Message))
                 con.commit()
             except:
                 con.rollback()

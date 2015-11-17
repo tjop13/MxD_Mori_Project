@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3CDCF86E1B44D29800BB1EF1 /* SwiftData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDCF86D1B44D29800BB1EF1 /* SwiftData.swift */; };
-		3CE8C1511B5F48350008A3AF /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE8C1501B5F48350008A3AF /* Reachability.swift */; };
 		3CE8C1531B5F4DDC0008A3AF /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CE8C1521B5F4DDC0008A3AF /* SystemConfiguration.framework */; };
 		3CF336471B325CFA00AC5C3E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF336461B325CFA00AC5C3E /* AppDelegate.swift */; };
 		3CF336491B325CFA00AC5C3E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF336481B325CFA00AC5C3E /* ViewController.swift */; };
@@ -16,7 +14,8 @@
 		3CF3364E1B325CFA00AC5C3E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3CF3364D1B325CFA00AC5C3E /* Images.xcassets */; };
 		3CF336511B325CFA00AC5C3E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CF3364F1B325CFA00AC5C3E /* LaunchScreen.xib */; };
 		3CF3365D1B325CFA00AC5C3E /* pyboardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF3365C1B325CFA00AC5C3E /* pyboardTests.swift */; };
-		3CF336671B32743F00AC5C3E /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CF336661B32743F00AC5C3E /* libsqlite3.dylib */; };
+		3CF62ACC1BF8B44200B11BB3 /* Briding-Header.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF62ACB1BF8B44200B11BB3 /* Briding-Header.m */; };
+		F831B5E105A0D21F834FBC44 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D79B595687C8101CDB565A63 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,9 +29,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		3CDCF86D1B44D29800BB1EF1 /* SwiftData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftData.swift; sourceTree = "<group>"; };
+		041BA563C4EE17727A98CCE4 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		3CE8C14F1B5F2CC20008A3AF /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
-		3CE8C1501B5F48350008A3AF /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		3CE8C1521B5F4DDC0008A3AF /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		3CF336411B325CFA00AC5C3E /* pyboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pyboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CF336451B325CFA00AC5C3E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -44,7 +42,10 @@
 		3CF336561B325CFA00AC5C3E /* pyboardTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = pyboardTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CF3365B1B325CFA00AC5C3E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3CF3365C1B325CFA00AC5C3E /* pyboardTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pyboardTests.swift; sourceTree = "<group>"; };
-		3CF336661B32743F00AC5C3E /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		3CF62ACA1BF8B44200B11BB3 /* Briding-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Briding-Header.h"; sourceTree = "<group>"; };
+		3CF62ACB1BF8B44200B11BB3 /* Briding-Header.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Briding-Header.m"; sourceTree = "<group>"; };
+		4AD98F6639B7DA3CB039D500 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		D79B595687C8101CDB565A63 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,7 +54,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3CE8C1531B5F4DDC0008A3AF /* SystemConfiguration.framework in Frameworks */,
-				3CF336671B32743F00AC5C3E /* libsqlite3.dylib in Frameworks */,
+				F831B5E105A0D21F834FBC44 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -67,14 +68,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1BB4CB242BDD63CD195D44B5 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				4AD98F6639B7DA3CB039D500 /* Pods.debug.xcconfig */,
+				041BA563C4EE17727A98CCE4 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		3CF336381B325CFA00AC5C3E = {
 			isa = PBXGroup;
 			children = (
 				3CE8C1521B5F4DDC0008A3AF /* SystemConfiguration.framework */,
-				3CF336661B32743F00AC5C3E /* libsqlite3.dylib */,
 				3CF336431B325CFA00AC5C3E /* pyboard */,
 				3CF336591B325CFA00AC5C3E /* pyboardTests */,
 				3CF336421B325CFA00AC5C3E /* Products */,
+				1BB4CB242BDD63CD195D44B5 /* Pods */,
+				8AD0C0D2988FFCE2B7968D59 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -90,8 +101,6 @@
 		3CF336431B325CFA00AC5C3E /* pyboard */ = {
 			isa = PBXGroup;
 			children = (
-				3CE8C1501B5F48350008A3AF /* Reachability.swift */,
-				3CDCF86D1B44D29800BB1EF1 /* SwiftData.swift */,
 				3CF336461B325CFA00AC5C3E /* AppDelegate.swift */,
 				3CF336481B325CFA00AC5C3E /* ViewController.swift */,
 				3CF3364A1B325CFA00AC5C3E /* Main.storyboard */,
@@ -99,6 +108,8 @@
 				3CF3364F1B325CFA00AC5C3E /* LaunchScreen.xib */,
 				3CF336441B325CFA00AC5C3E /* Supporting Files */,
 				3CE8C14F1B5F2CC20008A3AF /* Bridging-Header.h */,
+				3CF62ACA1BF8B44200B11BB3 /* Briding-Header.h */,
+				3CF62ACB1BF8B44200B11BB3 /* Briding-Header.m */,
 			);
 			path = pyboard;
 			sourceTree = "<group>";
@@ -128,6 +139,14 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		8AD0C0D2988FFCE2B7968D59 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D79B595687C8101CDB565A63 /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -135,9 +154,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3CF336601B325CFA00AC5C3E /* Build configuration list for PBXNativeTarget "pyboard" */;
 			buildPhases = (
+				E91D9750C5F38D2C1E22C62B /* Check Pods Manifest.lock */,
 				3CF3363D1B325CFA00AC5C3E /* Sources */,
 				3CF3363E1B325CFA00AC5C3E /* Frameworks */,
 				3CF3363F1B325CFA00AC5C3E /* Resources */,
+				6D64321E9D92B14C9D712317 /* Embed Pods Frameworks */,
+				46800E317C77CFDEC935298A /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -224,14 +246,61 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		46800E317C77CFDEC935298A /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6D64321E9D92B14C9D712317 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E91D9750C5F38D2C1E22C62B /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		3CF3363D1B325CFA00AC5C3E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				3CF336491B325CFA00AC5C3E /* ViewController.swift in Sources */,
-				3CDCF86E1B44D29800BB1EF1 /* SwiftData.swift in Sources */,
-				3CE8C1511B5F48350008A3AF /* Reachability.swift in Sources */,
+				3CF62ACC1BF8B44200B11BB3 /* Briding-Header.m in Sources */,
 				3CF336471B325CFA00AC5C3E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -359,6 +428,7 @@
 		};
 		3CF336611B325CFA00AC5C3E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4AD98F6639B7DA3CB039D500 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = pyboard/Info.plist;
@@ -370,6 +440,7 @@
 		};
 		3CF336621B325CFA00AC5C3E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 041BA563C4EE17727A98CCE4 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = pyboard/Info.plist;

@@ -8,6 +8,8 @@ import sqlitebck
 import threading
 import CheckDB
 
+import unicodedata
+
 import sys
 reload(sys)
 sys.setdefaultencoding('utf-8')
@@ -98,7 +100,6 @@ def PyBoardData():
         </dd><br>
         <dd id="Date">
         <form method="POST" action="./pyboard_Chronology.py">
-        <input type="submit" name=%(ReplyButton)s value="Reply">
         </form>
         </dd>
         '''
@@ -128,7 +129,8 @@ def PyBoardData():
                 else:
                     ReplyID = int(Key[0].lstrip("Reply"))
             if "name" in Key:
-                Option = " WHERE Registrant='" + unicode(form.getfirst('name',''),'utf-8') + "' "
+                name = unicodedata.normalize('NFKC', unicode(form.getfirst('name',''),'utf-8'))
+                Option = " WHERE Registrant like '%" + name + "%' "
                 if "location" in Key:
                     Option += "AND LocationID=" + unicode(form.getfirst('location',''),'utf-8') + " "
             elif "location" in Key:
@@ -137,7 +139,7 @@ def PyBoardData():
         if form.has_key('TAGInfo_Shelter'):
             Tag = " Tag = '救護所情報' OR "
         if form.has_key('TAGEdit_Patient'):
-            Tag = " Tag = '傷病者情報編集' OR "
+            Tag += " Tag = '傷病者情報編集' OR "
         if Tag != "":
             Tag = Tag.rstrip("OR ")
             Tag = "( " + Tag + " ) "
@@ -146,6 +148,26 @@ def PyBoardData():
                 Option += " AND " + Tag
             else:
                 Option = " WHERE" + Tag
+
+        if form.getfirst('send') and form.has_key('send') and form.has_key('Registrant') and form.has_key('Message'):
+            # nameが指定されていたらコメント登録
+            Registrant = unicode(form.getfirst('Registrant',''),'utf-8')
+            Message = unicode(form.getfirst('Message',''),'utf-8')
+            cur = con.cursor()
+            # print Registrant,Patient_Name,Patient_Age,Patient_Gender,Patient_Triage,Patient_Injuries_Diseases,Patient_Treatment,Patient_Hospital,comment
+            try:
+                cur.execute("SELECT count(*) FROM Chronologytbl WHERE LocationID='1' ")
+                IDnum = cur.fetchone()[0]
+                cur.execute("SELECT * FROM Chronologytbl WHERE ID=:id AND Registrant=:Registrant AND Message=:Message",{"id":IDnum,"Registrant":Registrant,"Message":Message})
+                if cur.fetchone() == None:
+                    IDnum += 1
+                    #cur.execute("INSERT INTO Chronologytbl(ID,LocationID,regdate,Registrant,Patient_Name,comment,SolvedFlag) values(?,'1',datetime('now','localtime'),?,?,?,'0')",(IDnum,Registrant,Patient_Name,comment))
+                    cur.execute("INSERT INTO Chronologytbl(ID,LocationID,regdate,Registrant,Message,Tag,Send) values(?,'1',datetime('now','localtime'),?,?,'救護所情報','1')",(IDnum,Registrant,Message))
+                con.commit()
+            except:
+                con.rollback()
+            finally:
+                cur.close()
 
         # 掲示板表示
         con.row_factory = sqlite3.Row
@@ -157,7 +179,7 @@ def PyBoardData():
                 ReplyName =  unicode(form.getfirst('Replyname',''),'utf-8')
                 ReplyComment = unicode(form.getfirst('Replycomment',''),'utf-8')
                 ThisKey = int(Key[0].lstrip("send"))
-                cur.execute("UPDATE Chronologytbl SET Replyname=:name, Replycomment=:comment WHERE UNIQUEID=:uniqueid",{'name':ReplyName, 'comment':ReplyComment, 'uniqueid':ThisKey})
+                cur.execute("UPDATE Chronologytbl SET Replyname=:name, Replycomment=:comment, Send='1' WHERE UNIQUEID=:uniqueid",{'name':ReplyName, 'comment':ReplyComment, 'uniqueid':ThisKey})
                 con.commit()
 
             cur.execute("SELECT DISTINCT * FROM Chronologytbl %s ORDER BY regdate DESC" % Option)

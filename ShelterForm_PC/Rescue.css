@@ -1,0 +1,18 @@
+body{
+  background-color: #FFDECA;
+}
+
+.menu{
+  background-color: #32CD32;
+  width:800px;
+  height: 50px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+
+.contents{
+  width: 840px;
+  height: 400px;
+  background-color: #FFEEDC;
+  margin:0 auto 0 auto;
+}

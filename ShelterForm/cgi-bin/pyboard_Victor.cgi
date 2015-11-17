@@ -95,7 +95,7 @@ finally:
             cur.execute("SELECT * FROM Victortbl WHERE ID=:id AND name=:Name AND comment=:Comment",{"id":IDnum,"Name":name,"Comment":comment})
             if cur.fetchone() == None:
                 IDnum += 1
-                cur.execute("INSERT INTO Victortbl(ID,LocationID,Genre,regdate,name,comment,Replyname,Replycomment,SolvedFlag) values(?,'1',?,datetime('now','localtime'),?,?,'','','0')",(IDnum,cgi.escape(genre),name,comment))
+                cur.execute("INSERT INTO Victortbl(ID,LocationID,Genre,regdate,name,comment,Replyname,Replycomment,SolvedFlag,Send) values(?,'1',?,datetime('now','localtime'),?,?,'','','0','1')",(IDnum,cgi.escape(genre),name,comment))
             con.commit()
         except:
             con.rollback()
