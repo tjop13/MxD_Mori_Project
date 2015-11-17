@@ -1,97 +1,106 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html lang="ja">
-  <head>
-    <META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=UTF-8">
-    <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
-    <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
 
-    <title>Sample</title>
-    <script type="text/javascript">
-      function alertfunc()
-      {
-          alert("");
-          // document.location.href = url;
-      }
-    </script>
+<head>
+  <META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=UTF-8">
+  <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+  <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
 
-    <style type="text/css">
-        body{
-          background-color: #E0FFFF;
-          width:750px;
-          margin:0 auto 0 auto;
-        }
+  <title>Sample</title>
+  <script type="text/javascript">
+    function alertfunc() {
+      alert("");
+      // document.location.href = url;
+    }
+  </script>
 
-        #Title{
-            text-align: left;
-        }
+  <style type="text/css">
+    body {
+      background-color: #E0FFFF;
+      width: 750px;
+      margin: 0 auto 0 auto;
+    }
 
-        #Message{
-          text-align: left;
-          margin-left: 20px;
-        }
+    #Title {
+      text-align: left;
+    }
 
-        #Date{
-          text-align: right;
-        }
+    #Message {
+      text-align: left;
+      margin-left: 20px;
+    }
 
-        #resolution{
-          text-align: left;
-        }
-        #BLACK{
-          background-color: #666666;
-        }
-        #GOODS{
-          background-color: #E9967A;
-        }
-        #RESCUE{
-          background-color: #FF3333;
-        }
+    #Date {
+      text-align: right;
+    }
 
-        .menu{
-          background-color: #32CD32;
-          width:750px;
-          height: 50px;
-          margin: 0 auto;
-        }
-        .option_main{
-            float: left;
-            width: 750;
-            background: #FFE2B2;
-            height: 1000px;
-        }
-        .option{
-          float:left;
-          width:150px;
-          background-color: #FFE2B2;
-          height: 300px;
-        }
+    #resolution {
+      text-align: left;
+    }
 
-        .main{
-          float:left;
-          width:600px;
-            margin-left: 10px;
-          background-color: #D1F0FF;
-          height: 0px;
-        }
-        .clears{
-          clear:both;
-        }
+    #BLACK {
+      background-color: #666666;
+    }
 
-    </style>
+    #GOODS {
+      background-color: #E9967A;
+    }
 
-  </head>
-  <body>
-    <center><H1>本部　掲示板</H1></center>
-    <div class="menu">
+    #RESCUE {
+      background-color: #FF3333;
+    }
+
+    .menu {
+      background-color: #32CD32;
+      width: 750px;
+      height: 50px;
+      margin: 0 auto;
+    }
+
+    .option_main {
+      float: left;
+      width: 750;
+      background: #FFE2B2;
+      height: 1000px;
+    }
+
+    .option {
+      float: left;
+      width: 150px;
+      background-color: #FFE2B2;
+      height: 300px;
+    }
+
+    .main {
+      float: left;
+      width: 600px;
+      margin-left: 10px;
+      background-color: #D1F0FF;
+      height: 0px;
+    }
+
+    .clears {
+      clear: both;
+    }
+  </style>
+
+</head>
+
+<body>
+  <center>
+    <H1>本部　掲示板</H1>
+  </center>
+  <div class="menu">
     <form method="POST" action="http://localhost:8080/cgi-bin/pyboard.cgi" target="pyboard">
-    <center>
-    <button type="submit" name="Menu" value="Patient" style="height: 50px; width: 25%; margin:0 0;">DMAT情報(傷病者情報)</button>
-    <button type="submit" name="Menu" value="Chronology" style="height: 50px; width: 24%; margin:0 0;">DMAT情報(クロノロジー)</button>
-    <button type="submit" name="Menu" value="Instraction" style="height: 50px; width: 24%; margin:0 0;">DMAT情報(指示)</button>
-    <button type="submit" name="Menu" value="Victim" style="height: 50px; width: 24%; margin:0 0;">被災者情報</button>
-    </center>
+      <center>
+        <button type="submit" name="Menu" value="Patient" style="height: 50px; width: 25%; margin:0 0;">DMAT情報(傷病者情報)</button>
+        <button type="submit" name="Menu" value="Chronology" style="height: 50px; width: 24%; margin:0 0;">DMAT情報(クロノロジー)</button>
+        <button type="submit" name="Menu" value="Instraction" style="height: 50px; width: 24%; margin:0 0;">DMAT情報(指示)</button>
+        <button type="submit" name="Menu" value="Victim" style="height: 50px; width: 24%; margin:0 0;">被災者情報</button>
+      </center>
     </form>
-    </div>
-      <iframe name="pyboard" src="http://localhost:8080/cgi-bin/pyboard.cgi" width="100%" height="1300px" frameborder="0" />
-  </body>
+  </div>
+  <iframe name="pyboard" src="http://localhost:8080/cgi-bin/pyboard.cgi" width="100%" height="1300px" frameborder="0" />
+</body>
+
 </html>

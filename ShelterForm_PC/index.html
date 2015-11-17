@@ -1,92 +1,115 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html lang="ja">
-  <head>
-    <META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=UTF-8">
-    <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
-    <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
-    <title>Sample</title>
-    <style>
-        body{
 
-          background-color: #FFDECA;
-        }
-        .contents{
-          width: 750px;
-          height: 400px;
-          background-color: #FFDECA;
-          margin:0 auto 0 auto;
-        }
-        .menu{
-          background-color: #32CD32;
-          width:750px;
-          height: 50px;
-          margin: 0 auto;
-          margin-bottom: 20px;
-        }
-        .option{
-          float:left;
-          width:140px;
-          background-color: #6699BB;
-          height: 400px;
-        }
-        .main{
-          float: left;
-          width: 600px;
-        }
-    </style>　
-  </head>
+<head>
+  <META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=UTF-8">
+  <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+  <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
+  <title>Sample</title>
+  <style>
+    body {
+      background-color: #FFDECA;
+    }
 
-  <body>
-    <div class="contents">
-    <center><H1>避難所1　掲示板</H1></center>
-    <center><a href="Rescue.html"><button>救助隊用</button></a></center>
+    .contents {
+      width: 750px;
+      height: 400px;
+      background-color: #FFDECA;
+      margin: 0 auto 0 auto;
+    }
+
+    .menu {
+      background-color: #32CD32;
+      width: 750px;
+      height: 50px;
+      margin: 0 auto;
+      margin-bottom: 20px;
+    }
+
+    .option {
+      float: left;
+      width: 140px;
+      background-color: #6699BB;
+      height: 400px;
+    }
+
+    .main {
+      float: left;
+      width: 600px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="contents">
+    <center>
+      <H1>避難所1　掲示板</H1>
+    </center>
+    <center>
+      <a href="Rescue.html">
+        <button>救助隊用</button>
+      </a>
+    </center>
     <div class="menu">
       <form method="POST" action="http://localhost:8000/cgi-bin/pyboard_Victor.cgi" target="pyboard_Victor">
-      <button type="submit" name="Menu" value="Patient" style="height: 50px; width: 49%; margin:0 0;">情報投稿掲示板</button>
-      <button type="submit" name="Menu" value="Chronology" style="height: 50px; width: 49%; margin:0 0;" disabled>News</button>
+        <button type="submit" name="Menu" value="Patient" style="height: 50px; width: 49%; margin:0 0;">情報投稿掲示板</button>
+        <button type="submit" name="Menu" value="Chronology" style="height: 50px; width: 49%; margin:0 0;" disabled>News</button>
       </form>
     </div>
     <div class="option">
-      <form method="POST" action="pyboard_Instraction.py" target="pyboard_Instraction" >
+      <form method="POST" action="pyboard_Instraction.py" target="pyboard_Instraction">
+        <br> 名前検索:
         <br>
-            名前検索:<br>
         <input type="text" name="name" size="13" value="">
-            <br>タグ:<br>
-        <input type="checkbox" name="TAGRescue" value="Black" style-"margin-left: 5px;" id="TagRescue"/>
-        <label for="TagRescue">救急</label><br>
-        <input type="checkbox" name="TAGGoods" value="Red" style-"margin-left: 5px;" id="TagGoods"/>
-        <label for="TagGoods">物資</label><br>
-        <input type="checkbox" name="TAGShelter" value="Yellow" style-"margin-left: 5px;" id="TAGShelter"/>
-        <label for="TagShelter">避難所</label><br>
+        <br>タグ:
+        <br>
+        <input type="checkbox" name="TAGRescue" value="Black" style- "margin-left: 5px;" id="TagRescue" />
+        <label for="TagRescue">救急</label>
+        <br>
+        <input type="checkbox" name="TAGGoods" value="Red" style- "margin-left: 5px;" id="TagGoods" />
+        <label for="TagGoods">物資</label>
+        <br>
+        <input type="checkbox" name="TAGShelter" value="Yellow" style- "margin-left: 5px;" id="TAGShelter" />
+        <label for="TagShelter">避難所</label>
+        <br>
 
         <button type="submit" style="margin-left: 5px; width: 90px; height: 30px;">変更</button>
       </form>
     </div>
     <div class="main">
-    <form method="POST" action="http://localhost:8000/cgi-bin/pyboard_Victor.cgi" target="pyboard_Victor">
-    <table>
-    <tr>
-    <td><b>Name:</b></td>
-    <td><input type="text" name="name" size="10" value=""></td>
-    </tr>
-    <tr>
-    <td><b>Message:</b></td>
-    <td><textarea cols="30" rows="5" name="comment"></textarea></td>
-    </tr>
-    <tr>
-    <td><b>Tag:</b></td>
-    <td><input type="radio" name="Genre" value="Rescue" checked="checked">Rescue
-    <input type="radio" name="Genre" value="Goods">Goods
-    <input type="radio" name="Genre" value="Refuge">避難所情報
-    </td>
-    </tr>
-    <tr>
-    <td colspan="2"><input type="submit" name="send" value="Send"><input type="reset" value="Reset"></td>
-    </tr>
-    </table>
-    </form>
-    <iframe name="pyboard_Victor" src="http://localhost:8000/cgi-bin/pyboard_Victor.cgi" width="100%" height="1500px" frameborder="0" />
+      <form method="POST" action="http://localhost:8000/cgi-bin/pyboard_Victor.cgi" target="pyboard_Victor">
+        <table>
+          <tr>
+            <td><b>Name:</b></td>
+            <td>
+              <input type="text" name="name" size="10" value="">
+            </td>
+          </tr>
+          <tr>
+            <td><b>Message:</b></td>
+            <td>
+              <textarea cols="30" rows="5" name="comment"></textarea>
+            </td>
+          </tr>
+          <tr>
+            <td><b>Tag:</b></td>
+            <td>
+              <input type="radio" name="Genre" value="Rescue" checked="checked">Rescue
+              <input type="radio" name="Genre" value="Goods">Goods
+              <input type="radio" name="Genre" value="Refuge">避難所情報
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <input type="submit" name="send" value="Send">
+              <input type="reset" value="Reset">
+            </td>
+          </tr>
+        </table>
+      </form>
+      <iframe name="pyboard_Victor" src="http://localhost:8000/cgi-bin/pyboard_Victor.cgi" width="100%" height="1500px" frameborder="0" />
+    </div>
   </div>
-  </div>
-  </body>
+</body>
+
 </html>
